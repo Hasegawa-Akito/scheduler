@@ -1,0 +1,49 @@
+@media screen and (min-width:770px)  {
+    .width{
+        width: 70%;
+    }
+}
+@media screen and (max-width:770px)  {
+    .width{
+        width: 100%;
+    }
+}
+.dark{
+    z-index: 5;
+    background-color: rgba(0, 0, 0,0.5);
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+.container{
+    position: relative;
+}
+
+.close{
+    float: right;
+    cursor: pointer;
+}
+.form{
+    z-index: 0;
+}
+
+.serch_result{
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 2px;
+}
+.display_on{
+    display: block;
+}
+.display_off{
+    display: none;
+}
+.controll_off{
+    pointer-events: none;
+}

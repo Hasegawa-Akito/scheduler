@@ -1,0 +1,48 @@
+body{
+    z-index: 0;
+}
+td{
+    text-align: center;
+}
+th{
+    text-align: center;
+}
+.radius{
+    border-radius: 4px;
+}
+.red{
+    background-color: rgb(233, 89, 89);
+    color: white;
+}
+.blue{
+    background-color: rgb(97, 97, 241);
+    color: white;
+}
+.green{
+    background-color: rgb(104, 214, 104);
+    color: white;
+}
+.yellow{
+    background-color: rgb(182, 182, 58);
+    color: white;
+}
+.gray{
+    background-color: gray;
+    color: white;
+}
+
+form{
+    display: flex;
+    position: relative;
+}
+.vdp-datepicker__calendar{
+    width: auto;
+}
+.date{
+    width: 50%;
+    float: left;
+}
+.submit{
+    float: left;
+    margin-left: 2%;
+}
