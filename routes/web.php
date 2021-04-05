@@ -34,6 +34,8 @@ Route::post('/announce/delete','App\Http\Controllers\AnnounceController@announce
 Route::get('/serch','App\Http\Controllers\SerchController@serch_index');
 Route::post('/serch','App\Http\Controllers\SerchController@serch');
 
+Route::get('/leaving','App\Http\Controllers\LeavingController@leaving_index');
+Route::post('/leaving','App\Http\Controllers\LeavingController@leaving');
 
 
 

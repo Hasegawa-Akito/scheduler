@@ -26,6 +26,7 @@ Vue.component('announce', require('./components/Announce.vue').default);
 Vue.component('removal-button', require('./components/RemovalButton.vue').default);
 Vue.component('serch', require('./components/Serch.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('leaving', require('./components/LeavingComponent.vue').default);
 
 
 /**

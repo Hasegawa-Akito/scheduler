@@ -30,17 +30,8 @@
                 :announce_url="{{json_encode(asset('/announce'))}}"
                 :serch_url="{{json_encode(asset('/serch'))}}"
                 :howto_url="{{json_encode('#')}}"
-                :leaving_url="{{json_encode('#')}}"
+                :leaving_url="{{json_encode(asset('/leaving'))}}"
                 ></header-component>
-                <!--<div class="big-monitar container d-flex flex-column flex-md-row justify-content-between">
-                    <a class="py-2  d-md-inline-block" href="{{asset('/timetable/'.$view_user_id.'/'.$room_id)}}">予定表示</a>
-                    <a class="py-2  d-md-inline-block" href="{{asset('/add')}}">予定追加</a>
-                    <a class="py-2  d-md-inline-block" href="{{asset('/announce')}}">アナウンス</a>
-                    <a class="py-2  d-md-inline-block" href="{{asset('/serch')}}">予定検索</a>
-                    <a class="py-2  d-md-inline-block" href="#">使い方</a>
-                    <a class="py-2  d-md-inline-block" href="#">ルーム退出</a>
-                </div>
-                -->
             </header>
             <div class="container">
                 @yield('content')
