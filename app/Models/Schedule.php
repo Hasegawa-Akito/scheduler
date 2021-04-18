@@ -56,11 +56,14 @@ class Schedule extends Model
 
                 $date=explode(" ",$schedule->start_time)[0];
                 $time=explode(":",explode(" ",$schedule->start_time)[1])[0].":".explode(":",explode(" ",$schedule->start_time)[1])[1];
-                //dd($time);
+                //dd($date);
+
+                $timeline_url=asset('/timetable/'.$schedule->user_id.'/'.$serch_info["room_id"].'/'.$date);
+
 
                 $this->schedule_serch_html.=<<<EOS
                     <tr>
-                    <th scope="row">$date</th>
+                    <th scope="row"><a href=$timeline_url>$date</a></th>
                     <td>$username</td>
                     <td>$schedule->schedule</td>
                     <td>$time</td>

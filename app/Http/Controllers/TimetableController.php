@@ -12,7 +12,7 @@ use App\Models\Room;
 
 class TimetableController extends Controller
 {
-    public function timetable(Request $request,$view_user_id,$room_id){
+    public function timetable_index(Request $request,$view_user_id,$room_id,$display_date){
 
         $session_user_id=$request->session()->get('user_id');
         $session_room_id=$request->session()->get('room_id');
@@ -25,10 +25,7 @@ class TimetableController extends Controller
         $request->session()->put('user_id',$session_user_id);
         $request->session()->put('room_id',$session_room_id);
 
-        //member_btnで表示させようとした時
-        if(isset($request->member_btn)){
-            return redirect(url('/timetable/'.$request->member_btn.'/'.$room_id));
-        }
+        
 
         $user=new User;
         $user_id_serch=$user->user_id_serch($view_user_id);
@@ -37,17 +34,16 @@ class TimetableController extends Controller
         }
         $view_username=$user_id_serch->username;
 
-        if($request->datepicker){
-            $date=$request->datepicker;
-        }
-        else if($request->old('date')){
-            $date=$request->old('date');
+        
+        if($display_date!="today"){
+            $date=$display_date;
         }
         else{
             $date= date('Y-m-d');
-            //dd($date);
+            
         }
-
+        //dd($date);
+        
         $timetable_create=new TimetableCreate;
         $timetable_html=$timetable_create->timetable_html($date,$view_user_id);
 
@@ -59,5 +55,19 @@ class TimetableController extends Controller
                                  "view_user_id"=>$view_user_id,
                                  "room_id"=>$room_id,
                                  "member_btn_html"=>$member_btn_html]);
+    }
+    public function timetable(Request $request,$view_user_id,$room_id){
+
+        //member_btnで表示させようとした時
+        if(isset($request->member_btn)){
+            $display_date="today";
+            $view_user_id=$request->member_btn;
+        }
+
+        if($request->datepicker){
+            $display_date=$request->datepicker;
+        }
+        
+        return redirect(url('/timetable/'.$view_user_id.'/'.$room_id.'/'.$display_date));
     }
 }

@@ -25,7 +25,7 @@
         <div id="app">  
             <header class="site-header sticky-top py-3 mb-3">
                 <header-component
-                :timetable_url="{{json_encode(asset('/timetable/'.$view_user_id.'/'.$room_id))}}"
+                :timetable_url="{{json_encode(asset('/timetable/'.$view_user_id.'/'.$room_id.'/today'))}}"
                 :add_url="{{json_encode(asset('/add'))}}"
                 :announce_url="{{json_encode(asset('/announce'))}}"
                 :serch_url="{{json_encode(asset('/serch'))}}"

@@ -21,7 +21,7 @@ Route::post('/roomlogin','App\Http\Controllers\LoginController@roomlogin');
 Route::get('/userlogin','App\Http\Controllers\LoginController@userlogin_index');
 Route::post('/userlogin','App\Http\Controllers\LoginController@userlogin');
 
-Route::get('/timetable/{view_user_id}/{room_id}','App\Http\Controllers\TimetableController@timetable');
+Route::get('/timetable/{view_user_id}/{room_id}/{display_date}','App\Http\Controllers\TimetableController@timetable_index');
 Route::post('/timetable/{view_user_id}/{room_id}','App\Http\Controllers\TimetableController@timetable');
 
 Route::get('/add','App\Http\Controllers\AdditionalController@add_index');

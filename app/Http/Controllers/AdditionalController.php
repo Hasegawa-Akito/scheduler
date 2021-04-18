@@ -39,8 +39,7 @@ class AdditionalController extends Controller
         $schedule->schedule_add($schedule_info);
         //dd($schedule_info);
 
-        $send=["date"=>$request->datepicker];
-        return redirect(url('/timetable/'.$session_user_id.'/'.$session_room_id))->withInput($send);
+        return redirect(url('/timetable/'.$session_user_id.'/'.$session_room_id.'/'.$request->datepicker));
         
     }
 }

@@ -61,6 +61,6 @@ class LoginController extends Controller
         $request->session()->put('user_id',$user_serch->user_id);
         $request->session()->put('room_id',$user_serch->room_id);
 
-        return redirect(url('/timetable/'.$user_serch->user_id.'/'.$user_serch->room_id));
+        return redirect(url('/timetable/'.$user_serch->user_id.'/'.$user_serch->room_id.'/today'));
     }
 }
