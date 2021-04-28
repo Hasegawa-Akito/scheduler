@@ -55,8 +55,10 @@ class User extends Authenticatable
     public function user_serch($user_info){
         $user=User::where('room_id',$user_info["room_id"])
                     ->where('username',$user_info["username"])
-                    ->where('password',$user_info["password"])
                     ->first();
+        if($user&&(!password_verify($user_info["password"], $user->password))){
+            $user=false;
+        }
         return $user;
     }
     public function user_id_serch($user_id){

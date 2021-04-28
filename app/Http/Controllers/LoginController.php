@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
 
-
 class LoginController extends Controller
 {
     public function roomlogin(Request $request){
         //dd($request->room_name);
 
-
+        
+        //dd($password);
 
         $room_info=["room_name"=>$request->room_name,
                     "password"=>$request->password,];
@@ -22,9 +22,12 @@ class LoginController extends Controller
 
         //room作成
         if(!isset($room_serch)){
-        $room->room_create($room_info);
-        //dd($room_info);
-        $room_serch=$room->room_serch($room_info);
+            $password = password_hash($request->password, PASSWORD_BCRYPT);
+            $room_create_info=["room_name"=>$request->room_name,
+                        "password"=>$password,];
+            $room->room_create($room_create_info);
+            //dd($room_info);
+            $room_serch=$room->room_serch($room_info);
         }
 
         //dd($room_serch->room_id);
@@ -45,6 +48,7 @@ class LoginController extends Controller
     }
 
     public function userlogin(Request $request){
+        
         $user_info=["username"=>$request->username,
                     "password"=>$request->password,
                     "room_id"=>$request->room_id];
@@ -53,7 +57,11 @@ class LoginController extends Controller
         $user_serch=$user->user_serch($user_info);
 
         if(!isset($user_serch)){
-            $user->user_create($user_info);
+            $password = password_hash($request->password, PASSWORD_BCRYPT);
+            $user_create_info=["username"=>$request->username,
+                    "password"=>$password,
+                    "room_id"=>$request->room_id];
+            $user->user_create($user_create_info);
             $user_serch=$user->user_serch($user_info);
         }
 
