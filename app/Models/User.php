@@ -61,6 +61,14 @@ class User extends Authenticatable
         }
         return $user;
     }
+    public function user_id_pass_serch($user_info){
+        $user=User::where('user_id',$user_info["user_id"])
+                    ->first();
+        if($user&&(!password_verify($user_info["password"], $user->password))){
+            $user=false;
+        }
+        return $user;
+    }
     public function user_id_serch($user_id){
         $user=User::where('user_id',$user_id)
                     ->first();

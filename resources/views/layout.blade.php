@@ -29,7 +29,6 @@
                 :add_url="{{json_encode(asset('/add'))}}"
                 :announce_url="{{json_encode(asset('/announce'))}}"
                 :serch_url="{{json_encode(asset('/serch'))}}"
-                :howto_url="{{json_encode('#')}}"
                 :leaving_url="{{json_encode(asset('/leaving'))}}"
                 ></header-component>
             </header>

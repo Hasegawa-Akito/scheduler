@@ -13,7 +13,6 @@
             <a class="py-2  d-md-inline-block" v-bind:href="add_url">予定追加</a>
             <a class="py-2  d-md-inline-block" v-bind:href="announce_url">アナウンス</a>
             <a class="py-2  d-md-inline-block" v-bind:href="serch_url">予定検索</a>
-            <a class="py-2  d-md-inline-block" v-bind:href="howto_url">使い方</a>
             <a class="py-2  d-md-inline-block" v-bind:href="leaving_url">ルーム退出</a>
         </div>
         </transition>
@@ -37,10 +36,6 @@
                 required:true
             },
             serch_url:{
-                type:String,
-                required:true
-            },
-            howto_url:{
                 type:String,
                 required:true
             },

@@ -2071,7 +2071,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     timetable_url: {
@@ -2087,10 +2086,6 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     serch_url: {
-      type: String,
-      required: true
-    },
-    howto_url: {
       type: String,
       required: true
     },
@@ -42627,15 +42622,6 @@ var render = function() {
                 attrs: { href: _vm.serch_url }
               },
               [_vm._v("予定検索")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "py-2  d-md-inline-block",
-                attrs: { href: _vm.howto_url }
-              },
-              [_vm._v("使い方")]
             ),
             _vm._v(" "),
             _c(
