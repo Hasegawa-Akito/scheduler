@@ -39,6 +39,10 @@
             <p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
         </form>
 
+        <room-login
+        :api_url="{{json_encode(asset('/getdata'))}}"
+        ></room-login>
+
     </div>
 
     

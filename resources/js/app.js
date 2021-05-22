@@ -27,6 +27,8 @@ Vue.component('removal-button', require('./components/RemovalButton.vue').defaul
 Vue.component('serch', require('./components/Serch.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('leaving', require('./components/LeavingComponent.vue').default);
+Vue.component('room-login', require('./components/RoomLoginComponent.vue').default);
+
 
 
 /**

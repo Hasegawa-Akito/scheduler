@@ -37,6 +37,7 @@ Route::post('/serch','App\Http\Controllers\SerchController@serch');
 Route::get('/leaving','App\Http\Controllers\LeavingController@leaving_index');
 Route::post('/leaving','App\Http\Controllers\LeavingController@leaving');
 
+Route::get('/getdata','App\Http\Controllers\GetdataController@getData');
 
 
 
