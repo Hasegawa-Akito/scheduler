@@ -37,7 +37,7 @@
                 <input type="hidden" name="room_id" value="{{$room_id}}">
 
             <button class="mt-5 btn btn-lg btn-primary btn-block" type="submit">Enter / Create room</button>
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
+            <p class="mt-5 mb-3 text-muted text-center">2021</p>
         </form>
 
     </div>

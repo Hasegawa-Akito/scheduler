@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app" class="main">
-
+        <!--
         <form class="form-signin mt-5" action="{{url('/roomlogin')}}" method="post" autocomplete='off'>
         @csrf
             <div class="text-center mb-3">
@@ -38,9 +38,13 @@
             <button class="mt-5 btn btn-lg btn-primary btn-block" type="submit">Verify / Create user</button>
             <p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
         </form>
+        -->
 
         <room-login
         :api_url="{{json_encode(asset('/getdata'))}}"
+        :form_url="{{json_encode(url('/roomlogin'))}}"
+        :icon_url="{{json_encode(asset('picture/S_icon.jpg'))}}"
+        :csrf="{{json_encode(csrf_token())}}"
         ></room-login>
 
     </div>

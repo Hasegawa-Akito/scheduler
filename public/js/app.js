@@ -2206,6 +2206,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //vueでaxiosを使えるようにする
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2213,12 +2230,45 @@ __webpack_require__.r(__webpack_exports__);
     api_url: {
       type: String,
       required: true
+    },
+    form_url: {
+      type: String,
+      required: true
+    },
+    icon_url: {
+      type: String,
+      required: true
+    },
+    csrf: {
+      type: String,
+      required: true
     }
   },
-  created: function created() {
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get(this.api_url).then(function (response) {
-      console.log(response.data);
-    });
+  data: function data() {
+    return {
+      room_name: "",
+      existing: false,
+      message: "",
+      class_name: "not_submit"
+    };
+  },
+  methods: {
+    room_confirm: function room_confirm() {
+      var _this = this;
+
+      console.log(this.room_name);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.api_url, {
+        room_name: this.room_name
+      }).then(function (response) {
+        if (response.data.existing) {
+          _this.message = "すでに使用されています";
+          _this.class_name = "not_submit";
+        } else {
+          _this.message = "";
+          _this.class_name = "";
+        }
+      });
+    }
   }
 });
 
@@ -42862,9 +42912,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    aaa\n")])
+  return _c(
+    "form",
+    {
+      staticClass: "form-signin mt-5",
+      attrs: { action: _vm.form_url, method: "post", autocomplete: "off" }
+    },
+    [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center mb-3" }, [
+        _c("img", {
+          staticClass: "mb-4 icon",
+          attrs: { src: _vm.icon_url, alt: "icon", width: "100", height: "100" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-label-group" }, [
+        _c("label", [_vm._v("room name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.room_name,
+              expression: "room_name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "room_name",
+            placeholder: "room name",
+            required: "",
+            autofocus: ""
+          },
+          domProps: { value: _vm.room_name },
+          on: {
+            change: _vm.room_confirm,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.room_name = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "message" }, [_vm._v(_vm._s(_vm.message))])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "mt-5 btn btn-lg btn-primary btn-block",
+          class: _vm.class_name,
+          attrs: { onclick: "submit();", type: "button" }
+        },
+        [_vm._v("Verify / Create user")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: "mt-5 mb-3 text-muted text-center" }, [
+        _vm._v("2021")
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-label-group mt-2" }, [
+      _c("label", { attrs: { for: "inputPassword" } }, [_vm._v("Password")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "password",
+          name: "password",
+          id: "inputPassword",
+          placeholder: "Password",
+          required: ""
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 

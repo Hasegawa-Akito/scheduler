@@ -5,3 +5,10 @@
 .icon{
     border-radius: 10px;
 }
+.message{
+    color: red;
+}
+.not_submit{
+    pointer-events: none;
+    opacity: 0.3;
+}
