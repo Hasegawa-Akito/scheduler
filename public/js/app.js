@@ -2223,6 +2223,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 //vueでaxiosを使えるようにする
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2231,7 +2238,11 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
-    form_url: {
+    login_url: {
+      type: String,
+      required: true
+    },
+    create_url: {
       type: String,
       required: true
     },
@@ -2242,32 +2253,80 @@ __webpack_require__.r(__webpack_exports__);
     csrf: {
       type: String,
       required: true
+    },
+    message: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
     return {
+      form_url: this.login_url,
       room_name: "",
+      password: "",
       existing: false,
-      message: "",
-      class_name: "not_submit"
+      valid: false,
+      menu: "新規ルーム作成画面へ",
+      value: "login",
+      click: 0,
+      type: "ログイン",
+      page: "ログインページ"
     };
   },
   methods: {
     room_confirm: function room_confirm() {
       var _this = this;
 
-      console.log(this.room_name);
+      //console.log(this.room_name)
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.api_url, {
         room_name: this.room_name
       }).then(function (response) {
-        if (response.data.existing) {
-          _this.message = "すでに使用されています";
-          _this.class_name = "not_submit";
+        if (_this.value == "create") {
+          if (response.data.existing) {
+            _this.message = "すでに使用されています";
+            _this.valid = false;
+          } else {
+            _this.message = "";
+            _this.valid = true;
+          }
         } else {
           _this.message = "";
-          _this.class_name = "";
+          _this.valid = true;
         }
       });
+    },
+    value_change: function value_change() {
+      if (this.click % 2 == 0) {
+        this.form_url = this.create_url;
+        this.message = "";
+        this.value = "create";
+        this.menu = "ルームログイン画面へ";
+        this.type = "新規作成";
+        this.room_name = "";
+        this.password = "";
+        this.page = "新規登録ページ";
+      } else {
+        this.form_url = this.login_url;
+        this.message = "";
+        this.value = "login";
+        this.menu = "新規ルーム作成画面へ";
+        this.type = "ログイン";
+        this.room_name = "";
+        this.password = "";
+        this.page = "ログインページ";
+      }
+
+      this.click += 1;
+    }
+  },
+  computed: {
+    //有効でないroom名または記入漏れの時は送信できないようにする
+    class_name: function class_name() {
+      if (!this.valid || this.password === "" || this.room_name === "") {
+        return "not_submit";
+      } else {
+        return "";
+      }
     }
   }
 });
@@ -42912,99 +42971,130 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      staticClass: "form-signin mt-5",
-      attrs: { action: _vm.form_url, method: "post", autocomplete: "off" }
-    },
-    [
-      _c("input", {
-        attrs: { type: "hidden", name: "_token" },
-        domProps: { value: _vm.csrf }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center mb-3" }, [
-        _c("img", {
-          staticClass: "mb-4 icon",
-          attrs: { src: _vm.icon_url, alt: "icon", width: "100", height: "100" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-label-group" }, [
-        _c("label", [_vm._v("room name")]),
+  return _c("div", { staticClass: "main" }, [
+    _c(
+      "form",
+      {
+        staticClass: "form-signin mt-5",
+        attrs: { action: _vm.form_url, method: "post", autocomplete: "off" }
+      },
+      [
+        _c("div", { staticClass: "text-right mb-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-info white",
+              attrs: { type: "button", name: "menu", value: _vm.value },
+              on: { click: _vm.value_change }
+            },
+            [_vm._v(_vm._s(_vm.menu))]
+          )
+        ]),
         _vm._v(" "),
         _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.room_name,
-              expression: "room_name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            name: "room_name",
-            placeholder: "room name",
-            required: "",
-            autofocus: ""
-          },
-          domProps: { value: _vm.room_name },
-          on: {
-            change: _vm.room_confirm,
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.room_name = $event.target.value
-            }
-          }
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
         }),
         _vm._v(" "),
-        _c("p", { staticClass: "message" }, [_vm._v(_vm._s(_vm.message))])
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "mt-5 btn btn-lg btn-primary btn-block",
-          class: _vm.class_name,
-          attrs: { onclick: "submit();", type: "button" }
-        },
-        [_vm._v("Verify / Create user")]
-      ),
-      _vm._v(" "),
-      _c("p", { staticClass: "mt-5 mb-3 text-muted text-center" }, [
-        _vm._v("2021")
-      ])
-    ]
-  )
+        _c("div", { staticClass: "text-center mb-3" }, [
+          _c("img", {
+            staticClass: "mb-4 icon",
+            attrs: {
+              src: _vm.icon_url,
+              alt: "icon",
+              width: "100",
+              height: "100"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-label-group" }, [
+          _c("label", [_vm._v("room name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.room_name,
+                expression: "room_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "room_name",
+              placeholder: "room name",
+              required: "",
+              autofocus: ""
+            },
+            domProps: { value: _vm.room_name },
+            on: {
+              change: _vm.room_confirm,
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.room_name = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "message" }, [_vm._v(_vm._s(_vm.message))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-label-group mt-2" }, [
+          _c("label", { attrs: { for: "inputPassword" } }, [
+            _vm._v("Password")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "password",
+              name: "password",
+              id: "inputPassword",
+              placeholder: "Password",
+              required: ""
+            },
+            domProps: { value: _vm.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "mt-5 btn btn-lg btn-primary btn-block",
+            class: _vm.class_name,
+            attrs: { onclick: "submit();", type: "button" }
+          },
+          [_vm._v(_vm._s(_vm.type))]
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-5 mb-3 text-muted text-center" }, [
+          _vm._v(_vm._s(_vm.page))
+        ])
+      ]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-label-group mt-2" }, [
-      _c("label", { attrs: { for: "inputPassword" } }, [_vm._v("Password")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "password",
-          name: "password",
-          id: "inputPassword",
-          placeholder: "Password",
-          required: ""
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

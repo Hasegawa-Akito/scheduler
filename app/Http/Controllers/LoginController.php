@@ -8,12 +8,34 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
+    public function roomlogin_index(Request $request){
+        //dd($request->old('room_id'));
+        $message=$request->old('message');
+        return view('roomlogin',["message"=>$message]);
+    }
+
+    public function roomcreate(Request $request){
+        
+        $room_info=["room_name"=>$request->room_name,
+                    "password"=>$request->password,];
+
+        $room=new Room;
+
+        $password = password_hash($request->password, PASSWORD_BCRYPT);
+        $room_create_info=["room_name"=>$request->room_name,
+                        "password"=>$password,];
+        $room->room_create($room_create_info);
+        //dd($room_info);
+        $room_serch=$room->room_serch($room_info);
+        $send=['room_id'=>$room_serch->room_id];
+        return redirect(url('/userlogin'))->withInput($send);
+    }
+
+
     public function roomlogin(Request $request){
         //dd($request->room_name);
-
-        
         //dd($password);
-
+        
         $room_info=["room_name"=>$request->room_name,
                     "password"=>$request->password,];
 
@@ -22,12 +44,8 @@ class LoginController extends Controller
 
         //room作成
         if(!isset($room_serch)){
-            $password = password_hash($request->password, PASSWORD_BCRYPT);
-            $room_create_info=["room_name"=>$request->room_name,
-                        "password"=>$password,];
-            $room->room_create($room_create_info);
-            //dd($room_info);
-            $room_serch=$room->room_serch($room_info);
+            $send=['message'=>"ログイン名またはパスワードが間違っています"];
+            return redirect(url('/roomlogin'))->withInput($send);
         }
 
         //dd($room_serch->room_id);

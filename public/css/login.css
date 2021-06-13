@@ -12,3 +12,9 @@
     pointer-events: none;
     opacity: 0.3;
 }
+.white:hover{
+    color:white;
+}
+.white:active{
+    color:white;
+}

@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/roomlogin',function(){
-    return view('roomlogin');
-});
+
+Route::get('/roomlogin','App\Http\Controllers\LoginController@roomlogin_index');
 Route::post('/roomlogin','App\Http\Controllers\LoginController@roomlogin');
+
+Route::post('/roomcreate','App\Http\Controllers\LoginController@roomcreate');
 
 Route::get('/userlogin','App\Http\Controllers\LoginController@userlogin_index');
 Route::post('/userlogin','App\Http\Controllers\LoginController@userlogin');
@@ -37,6 +38,7 @@ Route::post('/serch','App\Http\Controllers\SerchController@serch');
 Route::get('/leaving','App\Http\Controllers\LeavingController@leaving_index');
 Route::post('/leaving','App\Http\Controllers\LeavingController@leaving');
 
+//非同期処理api
 Route::post('/getdata','App\Http\Controllers\GetdataController@getData');
 
 

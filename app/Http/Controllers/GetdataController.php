@@ -13,6 +13,8 @@ class GetdataController extends Controller
         $room = Room::where('room_name',$request->input('room_name'))->first();
         $existing=isset($room);
         $json = ["existing" => $existing];
+        
+        //true or false で返す
         return response()->json($json);
     }
 }

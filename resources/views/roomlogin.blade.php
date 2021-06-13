@@ -17,34 +17,17 @@
     <title>ルームログイン</title>
 </head>
 <body>
-    <div id="app" class="main">
-        <!--
-        <form class="form-signin mt-5" action="{{url('/roomlogin')}}" method="post" autocomplete='off'>
-        @csrf
-            <div class="text-center mb-3">
-                <img class="mb-4 icon" src="{{asset('picture/S_icon.jpg')}}" alt="icon" width="100" height="100">
-            </div>
 
-            <div class="form-label-group">
-                <label >room name</label>
-                <input type="text" name="room_name"  class="form-control" placeholder="room name" required autofocus>
-            </div>
-
-            <div class="form-label-group mt-2">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            </div>
-
-            <button class="mt-5 btn btn-lg btn-primary btn-block" type="submit">Verify / Create user</button>
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2021</p>
-        </form>
-        -->
+    <div id="app">
+        
 
         <room-login
         :api_url="{{json_encode(asset('/getdata'))}}"
-        :form_url="{{json_encode(url('/roomlogin'))}}"
+        :login_url="{{json_encode(url('/roomlogin'))}}"
+        :create_url="{{json_encode(url('/roomcreate'))}}"
         :icon_url="{{json_encode(asset('picture/S_icon.jpg'))}}"
         :csrf="{{json_encode(csrf_token())}}"
+        :message="{{json_encode($message)}}"
         ></room-login>
 
     </div>
