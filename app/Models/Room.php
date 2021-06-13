@@ -26,9 +26,11 @@ class Room extends Model
     public function room_serch($room_info){
         $room=Room::where('room_name',$room_info["room_name"])
                     ->first();
-        if($room&&(!password_verify($room_info["password"], $room->password))){
+                    
+        if(isset($room)&&(!password_verify($room_info["password"], $room->password))){
             $room=false;
         }
+        //dd($room);
         return $room;
     }
 }

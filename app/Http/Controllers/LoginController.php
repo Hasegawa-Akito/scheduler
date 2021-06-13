@@ -43,9 +43,9 @@ class LoginController extends Controller
         $room_serch=$room->room_serch($room_info);
 
         //room作成
-        if(!isset($room_serch)){
-            $send=['message'=>"ログイン名またはパスワードが間違っています"];
-            return redirect(url('/roomlogin'))->withInput($send);
+        if(!$room_serch){
+            $message=['message'=>"ログイン名またはパスワードが間違っています"];
+            return redirect(url('/roomlogin'))->withInput($message);
         }
 
         //dd($room_serch->room_id);
