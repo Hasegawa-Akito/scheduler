@@ -22,6 +22,8 @@ Route::post('/roomcreate','App\Http\Controllers\LoginController@roomcreate');
 Route::get('/userlogin','App\Http\Controllers\LoginController@userlogin_index');
 Route::post('/userlogin','App\Http\Controllers\LoginController@userlogin');
 
+Route::post('/usercreate','App\Http\Controllers\LoginController@usercreate');
+
 Route::get('/timetable/{view_user_id}/{room_id}/{display_date}','App\Http\Controllers\TimetableController@timetable_index');
 Route::post('/timetable/{view_user_id}/{room_id}','App\Http\Controllers\TimetableController@timetable');
 
@@ -39,7 +41,7 @@ Route::get('/leaving','App\Http\Controllers\LeavingController@leaving_index');
 Route::post('/leaving','App\Http\Controllers\LeavingController@leaving');
 
 //非同期処理api
-Route::post('/getdata','App\Http\Controllers\GetdataController@getData');
-
+Route::post('/getroom','App\Http\Controllers\GetdataController@getRoom');
+Route::post('/getuser','App\Http\Controllers\GetdataController@getUser');
 
 

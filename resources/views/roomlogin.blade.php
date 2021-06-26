@@ -22,7 +22,7 @@
         
 
         <room-login
-        :api_url="{{json_encode(asset('/getdata'))}}"
+        :api_url="{{json_encode(asset('/getroom'))}}"
         :login_url="{{json_encode(url('/roomlogin'))}}"
         :create_url="{{json_encode(url('/roomcreate'))}}"
         :icon_url="{{json_encode(asset('picture/S_icon.jpg'))}}"

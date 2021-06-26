@@ -17,8 +17,17 @@
     <title>ユーザーログイン</title>
 </head>
 <body>
-    <div id="app" class="main">
-
+    <div id="app">
+        <user-login
+            :api_url="{{json_encode(asset('/getuser'))}}"
+            :login_url="{{json_encode(url('/userlogin'))}}"
+            :create_url="{{json_encode(url('/usercreate'))}}"
+            :icon_url="{{json_encode(asset('picture/S_icon.jpg'))}}"
+            :csrf="{{json_encode(csrf_token())}}"
+            :message="{{json_encode($message)}}"
+            :room_id="{{json_encode($room_id)}}"
+        ></user-login>
+        <!--
         <form class="form-signin mt-5" action="{{url('/userlogin')}}" method="post" autocomplete='off'>
         @csrf
             <div class="text-center mb-3">
@@ -26,7 +35,7 @@
             </div>
 
             <div class="form-label-group">
-                <label >username name</label>
+                <label >user name</label>
                 <input type="text" name="username"  class="form-control" placeholder="user name" required autofocus>
             </div>
 
@@ -39,6 +48,7 @@
             <button class="mt-5 btn btn-lg btn-primary btn-block" type="submit">Enter / Create room</button>
             <p class="mt-5 mb-3 text-muted text-center">2021</p>
         </form>
+        -->
 
     </div>
 

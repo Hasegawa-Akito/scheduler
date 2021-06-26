@@ -42,9 +42,9 @@ class LoginController extends Controller
         $room=new Room;
         $room_serch=$room->room_serch($room_info);
 
-        //room作成
+        
         if(!$room_serch){
-            $message=['message'=>"ログイン名またはパスワードが間違っています"];
+            $message=['message'=>"ルーム名またはパスワードが間違っています"];
             return redirect(url('/roomlogin'))->withInput($message);
         }
 
@@ -62,7 +62,34 @@ class LoginController extends Controller
         if(!isset($room_id)){
             return redirect(url('/roomlogin'));
         }
-        return view('userlogin',["room_id"=>$room_id]);
+        
+        $message=$request->old('message');
+
+        return view('userlogin',["room_id"=>$room_id,"message"=>$message]);
+    }
+
+    public function usercreate(Request $request){
+        
+        $user_info=["username"=>$request->username,
+                    "password"=>$request->password,
+                    "room_id"=>$request->room_id];
+
+        //dd($user_info);
+
+        $user=new User;
+
+        $password = password_hash($request->password, PASSWORD_BCRYPT);
+        $user_create_info=["username"=>$request->username,
+                    "password"=>$password,
+                    "room_id"=>$request->room_id];
+        $user->user_create($user_create_info);
+        $user_serch=$user->user_serch($user_info);
+
+        //sessionにユーザーid,ルームid追加
+        $request->session()->put('user_id',$user_serch->user_id);
+        $request->session()->put('room_id',$user_serch->room_id);
+
+        return redirect(url('/timetable/'.$user_serch->user_id.'/'.$user_serch->room_id.'/today'));
     }
 
     public function userlogin(Request $request){
@@ -70,17 +97,17 @@ class LoginController extends Controller
         $user_info=["username"=>$request->username,
                     "password"=>$request->password,
                     "room_id"=>$request->room_id];
-        //dd($user_info);
+        //dd($user_info["room_id"]);
+
         $user=new User;
         $user_serch=$user->user_serch($user_info);
 
-        if(!isset($user_serch)){
-            $password = password_hash($request->password, PASSWORD_BCRYPT);
-            $user_create_info=["username"=>$request->username,
-                    "password"=>$password,
-                    "room_id"=>$request->room_id];
-            $user->user_create($user_create_info);
-            $user_serch=$user->user_serch($user_info);
+        //dd($user_serch);
+
+        if(!$user_serch){
+            $message=['message'=>"ユーザー名またはパスワードが間違っています",
+                      'room_id'=>$user_info["room_id"]];
+            return redirect(url('/userlogin'))->withInput($message);
         }
 
         //sessionにユーザーid,ルームid追加

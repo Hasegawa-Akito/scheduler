@@ -28,6 +28,7 @@ Vue.component('serch', require('./components/Serch.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('leaving', require('./components/LeavingComponent.vue').default);
 Vue.component('room-login', require('./components/RoomLoginComponent.vue').default);
+Vue.component('user-login', require('./components/UserLoginComponent.vue').default);
 
 
 
