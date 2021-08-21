@@ -11,7 +11,7 @@
         @yield('loc-js')
         <script src="{{asset('js/app.js')}}" defer></script>
         @endif
-        @if(app('env')=='production')<!--デプロイ時の環境設定でのAPP_ENVの値-->
+        @if(app('env')=='heroku')<!--デプロイ時の環境設定でのAPP_ENVの値-->
         <link rel="stylesheet" href="{{secure_asset('css/app.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/layout.css')}}">
         @yield('her-css')

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
     <script src="{{asset('js/app.js')}}" defer></script>
     @endif
-    @if(app('env')=='production')<!--デプロイ時の環境設定でのAPP_ENVの値-->
+    @if(app('env')=='heroku')<!--デプロイ時の環境設定でのAPP_ENVの値-->
     <link rel="stylesheet" href="{{secure_asset('css/app.css')}}">
     <link rel="stylesheet" href="{{secure_asset('css/login.css')}}">
     <script src="{{secure_asset('js/app.js')}}" defer></script>
