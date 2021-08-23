@@ -8,11 +8,15 @@
 @endsection
 @section('content')
 
-
+        <addition
+            :form_url="{{json_encode(url('/add'))}}"
+            :csrf="{{json_encode(csrf_token())}}"
+        ></addition>
+<!--
     <div class="form mt-5">
         <form method="post" action="{{url('/add')}}" autocomplete='off'>
         @csrf
-            <!-- 日付をカレンダーを使って入力 -->
+            
             <div class="form-group row">
                 <label for="datepicker" class="ml-4 col-form-label text-md-right">日付</label>
                 <div class="col-md-6"  id="date_picker">
@@ -25,7 +29,6 @@
                 </div>
             </div>
             
-            <!-- timepicker -->
             <div class="form-group row">
                 <label for="datepicker" class="ml-4 col-form-label text-md-right">開始時刻</label>
                 <div class="col-md-6"  id="date_picker_start">
@@ -74,6 +77,7 @@
             </div>
             <button type="submit" class="btn btn-primary" value="submit">追加</button>
         </form>
-    </div>
+    </div> 
+    -->
 
 @endsection

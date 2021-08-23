@@ -56,9 +56,9 @@
 
 <script>
 
-    function dev_console(variable){
-    console.log(variable);
-    }
+    //function dev_console(variable){
+    //console.log(variable);
+    //}
     export default {
         props: {
             html:{
@@ -91,7 +91,7 @@
         computed:{
             controll:function(){
     
-                    dev_console(this.user_infos);
+                    //dev_console(this.user_infos);
                 
                 if(this.Display=="display_off"){
                     return "controll_on";

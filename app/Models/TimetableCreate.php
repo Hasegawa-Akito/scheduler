@@ -36,8 +36,9 @@ class TimetableCreate extends Model
             $hour=sprintf('%02d',$i);
             $next_hour=sprintf('%02d',$i+1);
             $dateTime=$date." ".$hour;
+            //dd($dateTime);
             $schedules=Schedule::where('user_id',$view_user_id)
-                                ->where('start_time','like',"$dateTime%")
+                                ->where('start_time','like',"$dateTime%") 
                                 ->get();
             //dd($schedules);
 
@@ -93,6 +94,7 @@ class TimetableCreate extends Model
             $hour=sprintf('%02d',$i);
             $next_hour=sprintf('%02d',$i+1);
             $dateTime="$next_date"." ".$hour;
+            //dd($dateTime);
             $schedules=Schedule::where('user_id',$view_user_id)
                                 ->where('start_time','like',"$dateTime%")
                                 ->get();

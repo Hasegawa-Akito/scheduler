@@ -1834,6 +1834,161 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue2_timepicker_src_vue_timepicker_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-timepicker/src/vue-timepicker.vue */ "./node_modules/vue2-timepicker/src/vue-timepicker.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//timepicker
+ //datepicker
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    'timepicker': vue2_timepicker_src_vue_timepicker_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    'datepicker': vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  props: {
+    form_url: {
+      type: String,
+      required: true
+    },
+    csrf: {
+      type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      //v-modelで連携
+      start_time: {
+        "HH": "00",
+        "mm": "00"
+      },
+      finish_time: {
+        "HH": "00",
+        "mm": "00"
+      },
+      schedule: null,
+      key: null,
+      defaultDate: new Date(),
+      DatePickerFormat: 'yyyy-MM-dd',
+      ja: {
+        language: 'Japanese',
+        months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        days: ['日', '月', '火', '水', '木', '金', '土'],
+        rtl: false,
+        ymd: 'yyyy-MM-dd',
+        yearSuffix: '年'
+      }
+    };
+  },
+  computed: {
+    //有効でないroom名または記入漏れの時は送信できないようにする
+    class_name: function class_name() {
+      if (!this.schedule || !this.key) {
+        return "not_submit";
+      } else {
+        var start_hour = parseInt(this.start_time.HH, 10);
+        var start_minute = parseInt(this.start_time.mm, 10);
+        var finish_hour = parseInt(this.finish_time.HH, 10);
+        var finish_minute = parseInt(this.finish_time.mm, 10);
+        var hour = start_hour - finish_hour;
+        var minute = start_minute - finish_minute;
+
+        if (hour > 0 || hour == 0 && minute > 0) {
+          return "not_submit";
+        }
+
+        return "";
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Announce.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Announce.vue?vue&type=script&lang=js& ***!
@@ -2400,10 +2555,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function dev_console(variable) {
-  console.log(variable);
-}
-
+//function dev_console(variable){
+//console.log(variable);
+//}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     html: {
@@ -2434,8 +2588,7 @@ function dev_console(variable) {
   },
   computed: {
     controll: function controll() {
-      dev_console(this.user_infos);
-
+      //dev_console(this.user_infos);
       if (this.Display == "display_off") {
         return "controll_on";
       } else {
@@ -2733,6 +2886,7 @@ Vue.component('header-component', __webpack_require__(/*! ./components/HeaderCom
 Vue.component('leaving', __webpack_require__(/*! ./components/LeavingComponent.vue */ "./resources/js/components/LeavingComponent.vue").default);
 Vue.component('room-login', __webpack_require__(/*! ./components/RoomLoginComponent.vue */ "./resources/js/components/RoomLoginComponent.vue").default);
 Vue.component('user-login', __webpack_require__(/*! ./components/UserLoginComponent.vue */ "./resources/js/components/UserLoginComponent.vue").default);
+Vue.component('addition', __webpack_require__(/*! ./components/AdditionComponent.vue */ "./resources/js/components/AdditionComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -40702,6 +40856,45 @@ const DEFAULT_OPTIONS = {
 
 /***/ }),
 
+/***/ "./resources/js/components/AdditionComponent.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/AdditionComponent.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdditionComponent.vue?vue&type=template&id=74b15bf4& */ "./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4&");
+/* harmony import */ var _AdditionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdditionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AdditionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AdditionComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Announce.vue":
 /*!**********************************************!*\
   !*** ./resources/js/components/Announce.vue ***!
@@ -41092,6 +41285,22 @@ component.options.__file = "resources/js/components/UserLoginComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdditionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AdditionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdditionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Announce.vue?vue&type=script&lang=js&":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/Announce.vue?vue&type=script&lang=js& ***!
@@ -41294,6 +41503,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_vue_timepicker_vue_vue_type_template_id_c4588f32___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_vue_timepicker_vue_vue_type_template_id_c4588f32___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../vue-loader/lib/index.js??vue-loader-options!./vue-timepicker.vue?vue&type=template&id=c4588f32& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/vue2-timepicker/src/vue-timepicker.vue?vue&type=template&id=c4588f32&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AdditionComponent_vue_vue_type_template_id_74b15bf4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AdditionComponent.vue?vue&type=template&id=74b15bf4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4&");
 
 
 /***/ }),
@@ -42684,6 +42910,256 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AdditionComponent.vue?vue&type=template&id=74b15bf4& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form mt-5" }, [
+    _c(
+      "form",
+      { attrs: { method: "post", action: _vm.form_url, autocomplete: "off" } },
+      [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "ml-4 col-form-label text-md-right",
+              attrs: { for: "datepicker" }
+            },
+            [_vm._v("日付")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-6", attrs: { id: "date_picker" } },
+            [
+              _c("datepicker", {
+                attrs: {
+                  format: _vm.DatePickerFormat,
+                  language: _vm.ja,
+                  name: "datepicker"
+                },
+                model: {
+                  value: _vm.defaultDate,
+                  callback: function($$v) {
+                    _vm.defaultDate = $$v
+                  },
+                  expression: "defaultDate"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "ml-4 col-form-label text-md-right",
+              attrs: { for: "datepicker" }
+            },
+            [_vm._v("開始時刻")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-6", attrs: { id: "date_picker_start" } },
+            [
+              _c("timepicker", {
+                attrs: {
+                  id: "timepicker_start",
+                  name: "start_time",
+                  placeholder: "時間を入力",
+                  "input-class": "form-control"
+                },
+                model: {
+                  value: _vm.start_time,
+                  callback: function($$v) {
+                    _vm.start_time = $$v
+                  },
+                  expression: "start_time"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "ml-4 col-form-label text-md-right",
+              attrs: { for: "datepicker" }
+            },
+            [_vm._v("終了時刻")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-md-6", attrs: { id: "date_picker_finish" } },
+            [
+              _c("timepicker", {
+                attrs: {
+                  id: "timepicker_finish",
+                  name: "finish_time",
+                  placeholder: "時間を入力",
+                  "input-class": "form-control"
+                },
+                model: {
+                  value: _vm.finish_time,
+                  callback: function($$v) {
+                    _vm.finish_time = $$v
+                  },
+                  expression: "finish_time"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3 mt-4" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.key,
+                expression: "key"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "keyword" },
+            domProps: { value: _vm.key },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.key = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c(
+            "label",
+            {
+              staticClass: "form-label",
+              attrs: { for: "exampleInputPassword1" }
+            },
+            [_vm._v("スケジュール内容")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.schedule,
+                expression: "schedule"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "schedule" },
+            domProps: { value: _vm.schedule },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.schedule = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            class: _vm.class_name,
+            attrs: { type: "submit", value: "submit" }
+          },
+          [_vm._v("追加")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "form-label" }, [
+      _vm._v("key word　"),
+      _c("a", { staticClass: "exp" }, [_vm._v("exp(会議、ミーティング)")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-3" }, [
+      _c("label", { staticClass: "col-form-label text-md-right" }, [
+        _vm._v("色設定")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("div", { staticClass: "input-group-prepend" }, [
+          _c("div", { staticClass: "input-group-text" }, [_vm._v("色")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { name: "color" } },
+          [
+            _c("option", { attrs: { value: "gray" } }, [_vm._v("gray")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "blue" } }, [_vm._v("blue")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "red" } }, [_vm._v("red")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "green" } }, [_vm._v("green")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "yellow" } }, [_vm._v("yellow")])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

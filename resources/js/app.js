@@ -29,6 +29,8 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 Vue.component('leaving', require('./components/LeavingComponent.vue').default);
 Vue.component('room-login', require('./components/RoomLoginComponent.vue').default);
 Vue.component('user-login', require('./components/UserLoginComponent.vue').default);
+Vue.component('addition', require('./components/AdditionComponent.vue').default);
+
 
 
 
