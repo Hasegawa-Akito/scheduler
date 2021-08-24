@@ -34,7 +34,7 @@
                         </Datepicker>                        
                     </div>
                     <div class="submit">
-                        <input type="submit" name="submit" value="submit" class="submit">
+                        <input type="submit" name="submit" value="閲覧" class="submit ml-2">
                     </div>
                     
                 </div>

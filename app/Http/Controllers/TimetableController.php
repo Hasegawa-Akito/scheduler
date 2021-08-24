@@ -70,4 +70,11 @@ class TimetableController extends Controller
         
         return redirect(url('/timetable/'.$view_user_id.'/'.$room_id.'/'.$display_date));
     }
+    public function timetable_delete(Request $request){
+        //dd($request->room_id);
+        $schedule=new Schedule;
+        $schedule->schedule_delete($request->delete_id);
+
+        return redirect(url('/timetable/'.$request->view_user_id.'/'.$request->room_id.'/'.$request->display_date));
+    }
 }

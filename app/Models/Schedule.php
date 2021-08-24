@@ -85,4 +85,9 @@ class Schedule extends Model
         //dd($this->schedule_serch_html);
         return $this->schedule_serch_html;
     }
+    public function schedule_delete($delete_id){
+        $schedule=new Schedule;
+        $schedule->destroy($delete_id);
+                        
+    }
 }

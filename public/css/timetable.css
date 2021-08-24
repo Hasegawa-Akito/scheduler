@@ -46,3 +46,7 @@ form{
     float: left;
     margin-left: 2%;
 }
+.delete{
+    float: right;
+    background-color: white;
+}

@@ -21,6 +21,9 @@ class TimetableCreate extends Model
         $next_date=$dates[0]."-".$dates[1]."-".sprintf('%02d',$dates[2]+1);
         //dd($next_date);
 
+        $delete_url=url('/timetable/delete');
+        $csrf=csrf_field();
+
         $html;
         for($k=0;$k<=24;$k++){
             $html[$k]="";
@@ -60,18 +63,38 @@ class TimetableCreate extends Model
                     $finish_hour=abs($finish_time[0]);
                     $finish_minute=abs($finish_time[1]);
                     $finish_time=$finish_time[0].":".$finish_time[1];
+                    $schedule_id=$schedule->id;
+                    //dd($schedule_id);
                     
-                    //dd($finish_minute);
-
                     $html[$i].= <<< EOS
-                        <div class="radius mb-2 $schedule->color">$schedule->schedule<a>　　　　　$start_time~$finish_time</a></div>
+                        <div class="radius mb-2 $schedule->color">$schedule->schedule<a>  $start_time~$finish_time</a>
+                            <form class="mb-2 mr-2 removal" action="$delete_url" method="post">
+                                $csrf
+                                <input type="hidden" name="view_user_id" value="$view_user_id">
+                                <input type="hidden" name="room_id" value="$schedule->room_id">
+                                <input type="hidden" name="display_date" value="$date">
+                                <edit
+                                :schedule_id="$schedule_id"
+                                ></edit>
+                            </form>
+                        </div>
                     EOS;
                     if($finish_minute==0){
                         $finish_hour=$finish_hour-1;
                     }
                     for($t=$start_hour+1;$t<=$finish_hour;$t++){
                         $html[$t].= <<< EOS
-                            <div class="radius mb-2 $schedule->color">$schedule->schedule<a>　　　　　$start_time~$finish_time</a></div>
+                        <div class="radius mb-2 $schedule->color">$schedule->schedule<a>  $start_time~$finish_time</a>
+                        <form class="mb-2 mr-2 removal" action="$delete_url" method="post">
+                            $csrf
+                            <input type="hidden" name="view_user_id" value="$view_user_id">
+                            <input type="hidden" name="room_id" value="$schedule->room_id">
+                            <input type="hidden" name="display_date" value="$date">
+                            <edit
+                            :schedule_id="$schedule_id"
+                            ></edit>
+                        </form>
+                        </div>
                         EOS;
                     }
                 }
