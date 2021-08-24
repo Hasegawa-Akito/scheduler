@@ -59,16 +59,6 @@ class Schedule extends Model
                 //dd($time);
 
                 $url_date=$date;
-                //0時から6時までは前の日のタイムテーブルのurlを作成
-                $time_hour=explode(":",$time)[0];
-                if($time_hour>=0&&$time_hour<6){
-                    $d=explode("-",$date);
-                    $url_date=date("Y-m-d",mktime(
-                        0,0,0,$d[1],$d[2]-1,$d[0]
-                    ));
-                    //dd($url_date);
-                }
-                
 
                 $timeline_url=asset('/timetable/'.$schedule->user_id.'/'.$serch_info["room_id"].'/'.$url_date);
 

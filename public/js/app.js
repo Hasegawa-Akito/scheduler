@@ -43089,7 +43089,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", name: "schedule" },
+            attrs: { type: "text", maxlength: "25", name: "schedule" },
             domProps: { value: _vm.schedule },
             on: {
               input: function($event) {

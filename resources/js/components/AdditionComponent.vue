@@ -48,7 +48,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">スケジュール内容</label>
-                <input type="text" class="form-control" name="schedule" v-model="schedule">
+                <input type="text" maxlength='25' class="form-control" name="schedule" v-model="schedule">
             </div>
             <div class="mb-3">
                 <label class="col-form-label text-md-right">色設定</label>

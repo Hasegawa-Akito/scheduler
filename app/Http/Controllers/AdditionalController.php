@@ -23,6 +23,8 @@ class AdditionalController extends Controller
         $session_user_id=$request->session()->get('user_id');
         $session_room_id=$request->session()->get('room_id');
 
+        //dd($request->start_time);
+
         $start_time=$request->datepicker." ".$request->start_time;
         $finish_time=$request->datepicker." ".$request->finish_time;
 
@@ -39,7 +41,11 @@ class AdditionalController extends Controller
         $schedule->schedule_add($schedule_info);
         //dd($schedule_info);
 
-        return redirect(url('/timetable/'.$session_user_id.'/'.$session_room_id.'/'.$request->datepicker));
+        
+        $url_date=$request->datepicker;
+        
+
+        return redirect(url('/timetable/'.$session_user_id.'/'.$session_room_id.'/'.$url_date));
         
     }
 }
