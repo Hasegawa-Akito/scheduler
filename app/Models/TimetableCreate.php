@@ -16,10 +16,9 @@ class TimetableCreate extends Model
 
     public function timetable_html($date,$view_user_id){
 
-        //表示したい日の次の日を取得
+        //日にちを-で分割
         $dates=explode("-",$date);
-        $next_date=$dates[0]."-".$dates[1]."-".sprintf('%02d',$dates[2]+1);
-        //dd($next_date);
+        
 
         $delete_url=url('/timetable/delete');
         $csrf=csrf_field();
