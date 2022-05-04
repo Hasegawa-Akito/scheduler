@@ -34,7 +34,7 @@ class TimetableCreate extends Model
             $start_time = explode(":", explode(" ", $schedule->start_time)[1]);
             $start_hour = abs($start_time[0]);
             $start_HM = $start_time[0].":".$start_time[1];
-            $finish_time = explode(":",explode(" ",$schedule->finish_time)[1]);
+            $finish_time = explode(":",explode(" ", $schedule->finish_time)[1]);
             $finish_hour = abs($finish_time[0]);
             $finish_minute = abs($finish_time[1]);
             $finish_HM = $finish_time[0].":".$finish_time[1];
@@ -89,8 +89,8 @@ class TimetableCreate extends Model
 
         //テーブルの横の時間を作成
         for($i=0; $i<=24; $i++){
-            $hour = sprintf('%02d',$i);
-            $next_hour = sprintf('%02d',$i+1);
+            $hour = sprintf('%02d', $i);
+            $next_hour = sprintf('%02d', $i+1);
             $dateTime = $date." ".$hour;
             //dd($dateTime);
 
