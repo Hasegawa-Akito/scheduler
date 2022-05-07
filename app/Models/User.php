@@ -69,8 +69,9 @@ class User extends Authenticatable
         }
         return $user;
     }
-    public function user_id_serch($user_id){
+    public function user_id_serch($user_id, $room_id){
         $user=User::where('user_id',$user_id)
+                    ->where('room_id',$room_id)
                     ->first();
                     
         //dd($user);
