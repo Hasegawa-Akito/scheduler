@@ -14,21 +14,19 @@ class TimetableController extends Controller
 {
     public function timetable_index(Request $request, $view_user_id, $room_id,$display_date){
 
+        //sessionからユーザーidとルームidを取得
         $session_user_id = $request->session()->get('user_id');
         $session_room_id = $request->session()->get('room_id');
-        //dd($session_room_id);
 
+        //sessionの情報とroom_idが違えばログイン画面へリダイレクト
         if($room_id != $session_room_id){
             return redirect(url('/roomlogin'));
         }
-        //sessionにユーザーid追加
-        $request->session()->put('user_id', $session_user_id);
-        $request->session()->put('room_id', $session_room_id);
-
         
 
         $user = new User;
-        $user_id_serch = $user->user_id_serch($view_user_id);
+        
+        $user_id_serch = $user->user_id_serch($view_user_id);//ユーザーidだけでなくroom_idも検索にかけるよう変更する
         if(!isset($user_id_serch)){
             return redirect(url('/roomlogin'));
         }
