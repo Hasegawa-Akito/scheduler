@@ -12,6 +12,7 @@ use App\Models\Room;
 
 class TimetableController extends Controller
 {
+    //getの時の処理
     public function timetable_index(Request $request, $view_user_id, $room_id,$display_date){
 
         //sessionからユーザーidとルームidを取得
@@ -23,13 +24,13 @@ class TimetableController extends Controller
             return redirect(url('/roomlogin'));
         }
         
-
+        //room_idとview_user_idの一致するユーザーがいるかどうか検索
         $user = new User;
-        
-        $user_id_serch = $user->user_id_serch($view_user_id);//ユーザーidだけでなくroom_idも検索にかけるよう変更する
+        $user_id_serch = $user->user_id_serch($view_user_id, $room_id);
         if(!isset($user_id_serch)){
             return redirect(url('/roomlogin'));
         }
+
         $view_username = $user_id_serch->username;
 
         
@@ -54,6 +55,7 @@ class TimetableController extends Controller
                                   "room_id"=>$room_id,
                                   "member_btn_html"=>$member_btn_html]);
     }
+
     public function timetable(Request $request,$view_user_id,$room_id){
 
         //member_btnで表示させようとした時
