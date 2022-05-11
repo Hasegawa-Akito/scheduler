@@ -2955,6 +2955,12 @@ var app = new Vue({
     'vue-timepicker': vue2_timepicker_src_vue_timepicker_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  props: {
+    date: {
+      type: String,
+      required: true
+    }
+  },
   data: {
     //v-modelで連携
     defaultDate: new Date(),

@@ -53,9 +53,15 @@ const app = new Vue({
        'vue-timepicker': VueTimepicker,
         Datepicker,
     },
+    props: {
+        date:{
+            type:String,
+            required:true
+        },  
+    },
     data: {
         //v-modelで連携
-        defaultDate: new Date(),
+        defaultDate: this.date,
         DatePickerFormat: 'yyyy-MM-dd',
         ja: {
             language: 'Japanese',

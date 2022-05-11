@@ -30,6 +30,7 @@
                             :format="DatePickerFormat"
                             :language="ja"
                             name="datepicker"
+                            :date="{{json_encode($date)}}"
                             >
                         </Datepicker>                        
                     </div>

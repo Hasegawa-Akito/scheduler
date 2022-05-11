@@ -13,8 +13,8 @@ use App\Models\Room;
 class TimetableController extends Controller
 {
     //getの時の処理
-    public function timetable_index(Request $request, $view_user_id, $room_id,$display_date){
-
+    public function timetable_index(Request $request, $view_user_id, $room_id, $display_date){
+        
         //sessionからユーザーidとルームidを取得
         $session_user_id = $request->session()->get('user_id');
         $session_room_id = $request->session()->get('room_id');
@@ -53,7 +53,8 @@ class TimetableController extends Controller
                                   "view_username" => $view_username,
                                   "view_user_id" => $view_user_id,
                                   "room_id" => $room_id,
-                                  "member_btn_html" => $member_btn_html]);
+                                  "member_btn_html" => $member_btn_html,
+                                  "date" => $date]);
     }
 
     //postで予定を表示処理
