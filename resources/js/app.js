@@ -31,6 +31,7 @@ Vue.component('room-login', require('./components/RoomLoginComponent.vue').defau
 Vue.component('user-login', require('./components/UserLoginComponent.vue').default);
 Vue.component('addition', require('./components/AdditionComponent.vue').default);
 Vue.component('edit', require('./components/EditSchedule.vue').default);
+Vue.component('calendar', require('./components/Calendar.vue').default);
 
 
 
@@ -47,30 +48,13 @@ Vue.component('edit', require('./components/EditSchedule.vue').default);
  //timepicker
  import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
 
+//datepickerのコンポーネントを使うのに必要
 const app = new Vue({
     el: '#app',
     components: {
        'vue-timepicker': VueTimepicker,
         Datepicker,
     },
-    props: {
-        date:{
-            type:String,
-            required:true
-        },  
-    },
-    data: {
-        //v-modelで連携
-        defaultDate: this.date,
-        DatePickerFormat: 'yyyy-MM-dd',
-        ja: {
-            language: 'Japanese',
-            months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            days: ['日', '月', '火', '水', '木', '金', '土'],
-            rtl: false,
-            ymd: 'yyyy-MM-dd',
-            yearSuffix: '年'
-        }
-    }
+    
+    
 });

@@ -25,14 +25,9 @@
                     </div>
                     <div class="col-md-6 date"  id="date_picker">
                         
-                        <Datepicker
-                            v-model="defaultDate"
-                            :format="DatePickerFormat"
-                            :language="ja"
-                            name="datepicker"
+                        <calendar
                             :date="{{json_encode($date)}}"
-                            >
-                        </Datepicker>                        
+                        ></calendar>
                     </div>
                     <div class="submit">
                         <input type="submit" name="submit" value="閲覧" class="submit ml-2">
