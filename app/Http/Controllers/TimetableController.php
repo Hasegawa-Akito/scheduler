@@ -12,6 +12,7 @@ use App\Models\Room;
 
 class TimetableController extends Controller
 {
+
     //getの時の処理
     public function timetable_index(Request $request, $view_user_id, $room_id, $display_date){
         
@@ -24,14 +25,23 @@ class TimetableController extends Controller
             return redirect(url('/roomlogin'));
         }
         
-        //room_idとview_user_idの一致するユーザーがいるかどうか検索
         $user = new User;
-        $user_id_serch = $user->user_id_serch($view_user_id, $room_id);
-        if(!isset($user_id_serch)){
-            return redirect(url('/roomlogin'));
-        }
 
-        $view_username = $user_id_serch->username;
+        //全表示の時
+        if($view_user_id == "all"){
+            $view_username = "全員";
+        }
+        //個別表示の時
+        else{
+            //room_idとview_user_idの一致するユーザーがいるかどうか検索
+            $user_id_serch = $user->user_id_serch($view_user_id, $room_id);
+            if(!isset($user_id_serch)){
+                return redirect(url('/roomlogin'));
+            }
+
+            $view_username = $user_id_serch->username;
+        }
+        
 
         
         if($display_date != "today"){
@@ -44,7 +54,7 @@ class TimetableController extends Controller
         //dd($date);
         
         $timetable_create = new TimetableCreate;
-        $timetable_html = $timetable_create->timetable_html($date, $view_user_id);
+        $timetable_html = $timetable_create->timetable_html($date, $view_user_id, $room_id);
 
         $member_btn_html = $user->member_list_btn($session_user_id, $session_room_id);
         

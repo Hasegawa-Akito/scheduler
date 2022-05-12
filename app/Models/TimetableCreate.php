@@ -14,13 +14,24 @@ class TimetableCreate extends Model
 
     private $timetable_html = "";
 
-    public function timetable_html($date, $view_user_id){
+    public function timetable_html($date, $view_user_id, $room_id){
 
         //検索日のスケジュールを取得
-        $schedules=Schedule::where('user_id', $view_user_id)
+        //roomメンバー全表示
+        if($view_user_id == "all"){
+            $schedules = Schedule::where('room_id', $room_id)
                                 ->where('start_time', 'like', "$date%") 
                                 ->orderBy('start_time', 'asc')
                                 ->get();
+        }
+        //ユーザー個別表示
+        else{
+            $schedules = Schedule::where('user_id', $view_user_id)
+                                ->where('start_time', 'like', "$date%") 
+                                ->orderBy('start_time', 'asc')
+                                ->get();
+        }
+        
         
         $html;
         for($k=0; $k<=24; $k++){

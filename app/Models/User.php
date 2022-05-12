@@ -86,7 +86,13 @@ class User extends Authenticatable
     }
 
     public function member_list_btn($user_id,$room_id){
+
+        //全員表示ボタン設置
+        $this->member_btn_html .= <<< EOS
+                <button type="submit" class="btn btn-outline-success ml-1" value="all" name="member_btn">all</button>
+        EOS;
         
+        //メンバーボタン設置
         $members=User::where('room_id',$room_id)->get();
         foreach($members as $member){
             $this->member_btn_html.= <<< EOS
