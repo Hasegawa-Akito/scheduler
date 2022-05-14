@@ -77,7 +77,7 @@ class TimetableController extends Controller
         }
 
         //datepickerで日付を選択して予定を表示させようとした時
-        if($request->datepicker){
+        if(isset($request->datepicker)){
             $display_date = $request->datepicker;
         }
         
