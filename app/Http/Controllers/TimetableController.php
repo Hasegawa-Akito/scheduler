@@ -72,11 +72,11 @@ class TimetableController extends Controller
 
         //member_btnをおして予定を表示させようとした時
         if(isset($request->member_btn)){
-            $display_date = "today";
+            $display_date = $request->display_date;
             $view_user_id = $request->member_btn;
         }
 
-        //日付を選択して予定を表示させようとした時
+        //datepickerで日付を選択して予定を表示させようとした時
         if($request->datepicker){
             $display_date = $request->datepicker;
         }

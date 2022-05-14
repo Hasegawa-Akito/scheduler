@@ -11,7 +11,8 @@
 
         <div class="member_list">
             <form class="member_select" action="{{url('/timetable/'.$user_id.'/'.$room_id)}}" method="post" autocomplete='off'>
-            @csrf
+                @csrf
+                <input type="hidden" name="display_date" value="{{$date}}">
                 {!!$member_btn_html!!}
             </form>
         </div>
