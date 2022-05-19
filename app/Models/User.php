@@ -86,7 +86,7 @@ class User extends Authenticatable
     }
 
 
-    public function member_list_btn($user_id,$room_id){
+    public function member_list_btn($user_id, $room_id){
 
         //全員表示ボタン設置
         $this->member_btn_html .= <<< EOS
@@ -94,7 +94,7 @@ class User extends Authenticatable
         EOS;
         
         //メンバーボタン設置
-        $members=User::where('room_id',$room_id)->get();
+        $members=User::where('room_id', $room_id)->get();
 
         foreach($members as $member){
             $this->member_btn_html .= <<< EOS
