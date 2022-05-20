@@ -44,6 +44,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //userを作成
     public function user_create($user_info){
         $user = new User;
         $user->password = $user_info['password'];
@@ -52,15 +53,23 @@ class User extends Authenticatable
 
         return $user->save();
     }
+
+    //login時のユーザー照合
     public function user_serch($user_info){
+
+        //roomidとusernameで検索
         $user = User::where('room_id', $user_info["room_id"])
                     ->where('username', $user_info["username"])
                     ->first();
+        
+        //ハッシュ化されたパスワードと比較
         if($user && (!password_verify($user_info["password"], $user->password))){
             $user = false;
         }
         return $user;
     }
+
+    //ユーザーをidとパスワードで照合
     public function user_id_pass_serch($user_info){
         $user = User::where('user_id', $user_info["user_id"])
                     ->first();
@@ -69,23 +78,25 @@ class User extends Authenticatable
         }
         return $user;
     }
+
+    //ユーザーをroomidとuseridで検索
     public function user_id_serch($user_id, $room_id){
         $user = User::where('user_id', $user_id)
                     ->where('room_id', $room_id)
                     ->first();
                     
-        //dd($user);
-
         return $user;
     }
 
+    //roomのメンバー全員を取得
     public function user_room_id_serch($room_id){
         $user = User::where('room_id', $room_id)
                     ->get();
         return $user;
     }
 
-
+    
+    //メンバーの表示ボタン作成
     public function member_list_btn($user_id, $room_id){
 
         //全員表示ボタン設置
