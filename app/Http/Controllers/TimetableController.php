@@ -13,15 +13,24 @@ use App\Models\Room;
 class TimetableController extends Controller
 {
 
+    private $session_user_id;
+    private $session_room_id;
+
+    //sessionに保存されているroomidと渡されたroomidが同じか
+    private function confirm_session($request, $room_id){
+
+        //sessionからユーザーidとルームidを取得
+        $this->session_user_id = $request->session()->get('user_id');
+        $this->session_room_id = $request->session()->get('room_id');
+
+        return $room_id != $this->session_room_id;
+    }
+
     //getの時の処理
     public function timetable_index(Request $request, $view_user_id, $room_id, $display_date){
-        
-        //sessionからユーザーidとルームidを取得
-        $session_user_id = $request->session()->get('user_id');
-        $session_room_id = $request->session()->get('room_id');
 
         //sessionの情報とroom_idが違えばログイン画面へリダイレクト
-        if($room_id != $session_room_id){
+        if($this->confirm_session($request, $room_id)){
             return redirect(url('/roomlogin'));
         }
         
@@ -51,15 +60,16 @@ class TimetableController extends Controller
             $date = date('Y-m-d');
             
         }
-        //dd($date);
         
+        //timetable作成
         $timetable_create = new TimetableCreate;
         $timetable_html = $timetable_create->timetable_html($date, $view_user_id, $room_id);
 
-        $member_btn_html = $user->member_list_btn($session_user_id, $session_room_id);
+        //メンバーボタン作成
+        $member_btn_html = $user->member_list_btn($this->session_user_id, $this->session_room_id);
         
         return view('timetable', ["timetable_html" => $timetable_html,
-                                  "user_id" => $session_user_id,
+                                  "user_id" => $this->session_user_id,
                                   "view_username" => $view_username,
                                   "view_user_id" => $view_user_id,
                                   "room_id" => $room_id,
@@ -86,13 +96,10 @@ class TimetableController extends Controller
 
     //予定削除処理
     public function timetable_delete(Request $request){
-        //セッションからuser_idとroom_idを取得
-        $session_user_id = $request->session()->get('user_id');
-        $session_room_id = $request->session()->get('room_id');
-
-        //そのルームの人のみが削除できるようにする
-        if($session_room_id != $request->room_id){
-            return redirect(url('/timetable/'.$session_user_id.'/'.$session_room_id.'/'.$request->display_date));
+        
+        //そのルームの人以外が削除しようとしたらリダイレクト
+        if($this->confirm_session($request, $request->room_id)){
+            return redirect(url('/timetable/'.$this->session_user_id.'/'.$this->session_room_id.'/'.$request->display_date));
         }
         
         $schedule = new Schedule;
