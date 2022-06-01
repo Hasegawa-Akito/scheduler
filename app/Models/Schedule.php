@@ -35,7 +35,7 @@ class Schedule extends Model
     public function schedule_serch_html($serch_info){
         //検索の際入れられてない情報のところには%が入っている。
         $start_time = $serch_info["year"] . "-" . $serch_info["month"] . "-" . $serch_info["day"] . " " . $serch_info["start_hour"] . ":" . $serch_info["start_minute"] . ":" . "%";
-        $finish_time = $serch_info["year"] . "-".$serch_info["month"] . "-" . $serch_info["day"] . " " . $serch_info["finish_hour"] . ":" . $serch_info["finish_minute"] . ":" . "%";
+        $finish_time = $serch_info["year"] . "-" . $serch_info["month"] . "-" . $serch_info["day"] . " " . $serch_info["finish_hour"] . ":" . $serch_info["finish_minute"] . ":" . "%";
         $keyword = "%" . $serch_info['keyword'] . "%";
         
         $schedules=Schedule::where('room_id', $serch_info["room_id"])
@@ -48,21 +48,18 @@ class Schedule extends Model
                           })
                           ->get();
         
-        if(isset($schedules[0])){
+        if(count($schedules) > 0){
             foreach($schedules as $schedule){
 
+                //スケジュールのuser_idからそのユーザー名を取得
                 $user = User::where('user_id', $schedule->user_id)->first();
                 $username = $user->username;
-                //dd($user->username);
 
                 $date = explode(" ", $schedule->start_time)[0];
                 $time = explode(":", explode(" ", $schedule->start_time)[1])[0] . ":" . explode(":", explode(" ", $schedule->start_time)[1])[1];
                 //dd($time);
 
-                $url_date = $date;
-
-                $timeline_url = asset('/timetable/' . $schedule->user_id . '/' . $serch_info["room_id"] . '/' . $url_date);
-
+                $timeline_url = asset('/timetable/' . $schedule->user_id . '/' . $serch_info["room_id"] . '/' . $date);
 
                 $this->schedule_serch_html .= <<<EOS
                     <tr>
@@ -84,9 +81,11 @@ class Schedule extends Model
                     </tr>
                 EOS;
         }
-        //dd($this->schedule_serch_html);
+
         return $this->schedule_serch_html;
     }
+
+    //スケジュール削除
     public function schedule_delete($delete_id){
         $schedule = new Schedule;
         $schedule->destroy($delete_id);
