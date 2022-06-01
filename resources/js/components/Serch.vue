@@ -11,22 +11,27 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">メンバー</div>
                             </div>
-                            <select class="form-control"  name="user_id">
+                            <select class="form-control"  name="user_id" v-model="input_user_id">
                                 <option value="%">全員</option>
-                                <option v-for="(username,user_id) in user_infos" v-bind:value="user_id" v-bind:key="username">{{username}}</option>
+                                <option v-for="(username, user_id) in user_infos" v-bind:value="user_id" v-bind:key="username">{{username}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <date-designate></date-designate>
+                <!-- 子コンポーネントからの値受け取り -->
+                <date-designate
+                    @recDate="recDate"
+                ></date-designate>
 
-                <time-designate></time-designate>
-                
+                <time-designate
+                    @recTime="recTime"
+                ></time-designate>
+
                 <div class="keyword width"> 
                     <div class="mb-3 mt-4">
                         <label class="form-label">key word</label>
-                        <input type="text" class="form-control" name="keyword">
+                        <input type="text" class="form-control" name="keyword" v-model="key_word">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" value="submit">検索</button>
@@ -55,29 +60,31 @@
 </template>
 
 <script>
+import DateDesignate from './DateDesignate.vue';
 
     //function dev_console(variable){
     //console.log(variable);
     //}
     export default {
+  components: { DateDesignate },
         props: {
-            html:{
+            html: {
                 type:String,
                 required:true
             },
-            display:{
+            display: {
                 type:String,
                 required:true
             },
-            url:{
+            url: {
                 type:String,
                 required:true
             },
-            csrf:{
+            csrf: {
                 type:String,
                 required:true
             },
-            user_infos:{
+            user_infos: {
                 type:Array,
                 required:true
             }
@@ -85,15 +92,22 @@
         },
         data(){
             return{
-                Display:this.display
+                Display: this.display,
+                input_user_id: "%", //初期設定は全員を指す %
+                inputYear: "%",
+                inputMonth: "%",
+                inputDate: "%",
+                start_hour: "%",
+                start_minute: "%",
+                finish_hour: "%",
+                finish_minute: "%",
+                key_word: ""
             };
         },
-        computed:{
-            controll:function(){
-    
-                    //dev_console(this.user_infos);
+        computed: {
+            controll(){
                 
-                if(this.Display=="display_off"){
+                if(this.Display == "display_off"){
                     return "controll_on";
                 }
                 else{
@@ -102,9 +116,29 @@
             }
         },
         
-        methods:{
-            display_off:function(){
-                this.Display="display_off";
+        methods: {
+            //モーダルを閉じる
+            display_off(){
+                this.Display = "display_off";
+            },
+
+            //スケジュール検索apiを叩く
+            async scheduleSerch(){
+
+            },
+
+            //子コンポーネントから日にちの値受け取り
+            recDate(inputDate){
+                this.inputYear = inputDate.year;
+                this.inputMonth = inputDate.month;
+                this.inputDay = inputDate.day;
+            },
+            //子コンポーネントから時間の値受け取り
+            recTime(inputTime){
+                this.start_hour = inputTime.start_hour;
+                this.start_minute = inputTime.start_minute;
+                this.finish_hour = inputTime.finish_hour;
+                this.finish_minute = inputTime.finish_minute;
             },
         },
     }
