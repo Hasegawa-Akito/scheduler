@@ -2702,6 +2702,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
  //function dev_console(variable){
 //console.log(variable);
 //}
@@ -2730,6 +2732,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     user_infos: {
       type: Array,
       required: true
+    },
+    room_id: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
@@ -2739,12 +2745,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //初期設定は全員を指す %
       inputYear: "%",
       inputMonth: "%",
-      inputDate: "%",
+      inputDay: "%",
       start_hour: "%",
       start_minute: "%",
       finish_hour: "%",
       finish_minute: "%",
-      key_word: ""
+      keyword: "",
+      value: ""
     };
   },
   computed: {
@@ -2787,6 +2794,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.start_minute = inputTime.start_minute;
       this.finish_hour = inputTime.finish_hour;
       this.finish_minute = inputTime.finish_minute;
+    },
+    //予定検索
+    serch: function serch() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post(_this.url, {
+                  year: _this.inputYear,
+                  month: _this.inputMonth,
+                  day: _this.inputDay,
+                  start_hour: _this.start_hour,
+                  start_minute: _this.start_minute,
+                  finish_hour: _this.finish_hour,
+                  finish_minute: _this.finish_minute,
+                  keyword: _this.keyword,
+                  user_id: _this.input_user_id,
+                  room_id: _this.room_id
+                }).then(function (response) {
+                  _this.value = response;
+                })["catch"](function (error) {
+                  _this.value = error;
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -45182,19 +45224,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.key_word,
-                    expression: "key_word"
+                    value: _vm.keyword,
+                    expression: "keyword"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { type: "text", name: "keyword" },
-                domProps: { value: _vm.key_word },
+                domProps: { value: _vm.keyword },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.key_word = $event.target.value
+                    _vm.keyword = $event.target.value
                   }
                 }
               })
@@ -45226,7 +45268,18 @@ var render = function() {
         _vm._v(" "),
         _c("tbody", { domProps: { innerHTML: _vm._s(_vm.html) } })
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-info",
+        attrs: { type: "button" },
+        on: { click: _vm.serch }
+      },
+      [_vm._v("検索")]
+    ),
+    _vm._v("\n    " + _vm._s(_vm.value) + "\n")
   ])
 }
 var staticRenderFns = [

@@ -36,7 +36,8 @@ Route::post('/announce','App\Http\Controllers\AnnounceController@announce');
 Route::post('/announce/delete','App\Http\Controllers\AnnounceController@announce_delete');
 
 Route::get('/serch','App\Http\Controllers\SerchController@serch_index');
-Route::post('/serch','App\Http\Controllers\SerchController@serch');
+// Route::post('/serch','App\Http\Controllers\SerchController@serch');
+Route::post('/serch','App\Http\Controllers\SerchController@serchApi');
 
 Route::get('/leaving','App\Http\Controllers\LeavingController@leaving_index');
 Route::post('/leaving','App\Http\Controllers\LeavingController@leaving');

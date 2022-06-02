@@ -31,7 +31,7 @@
                 <div class="keyword width"> 
                     <div class="mb-3 mt-4">
                         <label class="form-label">key word</label>
-                        <input type="text" class="form-control" name="keyword" v-model="key_word">
+                        <input type="text" class="form-control" name="keyword" v-model="keyword">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" value="submit">検索</button>
@@ -56,6 +56,8 @@
             
 
         </div>
+        <button type="button" class="btn btn-info" v-on:click="serch">検索</button>
+        {{value}}
     </div>
 </template>
 
@@ -87,6 +89,10 @@ import DateDesignate from './DateDesignate.vue';
             user_infos: {
                 type:Array,
                 required:true
+            },
+            room_id: {
+                type:String,
+                required:true
             }
             
         },
@@ -96,12 +102,13 @@ import DateDesignate from './DateDesignate.vue';
                 input_user_id: "%", //初期設定は全員を指す %
                 inputYear: "%",
                 inputMonth: "%",
-                inputDate: "%",
+                inputDay: "%",
                 start_hour: "%",
                 start_minute: "%",
                 finish_hour: "%",
                 finish_minute: "%",
-                key_word: ""
+                keyword: "",
+                value: ""
             };
         },
         computed: {
@@ -139,6 +146,30 @@ import DateDesignate from './DateDesignate.vue';
                 this.start_minute = inputTime.start_minute;
                 this.finish_hour = inputTime.finish_hour;
                 this.finish_minute = inputTime.finish_minute;
+            },
+            
+            //予定検索
+            async serch() {
+
+                await axios.post(this.url, { year: this.inputYear,
+                                             month: this.inputMonth,
+                                             day: this.inputDay,
+                                             start_hour: this.start_hour,
+                                             start_minute: this.start_minute,
+                                             finish_hour: this.finish_hour,
+                                             finish_minute: this.finish_minute,
+                                             keyword: this.keyword,
+                                             user_id: this.input_user_id,
+                                             room_id: this.room_id
+                                            })
+                .then((response) => {
+                    this.value = response;
+
+                })
+                .catch((error) => {
+                    this.value = error;
+                })
+                
             },
         },
     }

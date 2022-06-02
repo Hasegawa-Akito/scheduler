@@ -13,5 +13,6 @@
     :url="{{json_encode(url('/serch'))}}"
     :csrf="{{json_encode(csrf_token())}}"
     :user_infos="{{json_encode($user_infos)}}"
+    :room_id="{{json_encode($room_id)}}"
     ></serch>
 @endsection

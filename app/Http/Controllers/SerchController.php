@@ -66,5 +66,25 @@ class SerchController extends Controller
                             ]);
     }
 
+    public function serchApi(Request $request){
+    
+        $serch_info = ["year" => $request->year,
+                       "month" => $request->month,
+                       "day" => $request->day,
+                       "start_hour" => $request->start_hour,
+                       "start_minute" => $request->start_minute,
+                       "finish_hour" => $request->finish_hour,
+                       "finish_minute" => $request->finish_minute,
+                       "keyword" => $request->keyword,
+                       "room_id" => $request->room_id,
+                       "user_id" => $request->user_id,
+                     ];
+
+        $schedule = new Schedule;
+        $schedule_serch = $schedule->schedule_serch($serch_info);
+        
+        return response()->json($schedule_serch);
+    }
+
     
 }
