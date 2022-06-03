@@ -2,7 +2,6 @@
     <div>
         <div class="form ml-3 mr-4" v-bind:class="controll">
             <div class="dark" v-bind:class="Display"></div>
-            <form v-bind:action="url" method="post" autocomplete='off'>
                 <input type="hidden" name="_token" v-bind:value="csrf" >
                 <div class="form-row align-items-center mb-2">
                     <label class="form-label mt-1 ml-2">メンバー指定 </label>
@@ -34,9 +33,10 @@
                         <input type="text" class="form-control" name="keyword" v-model="keyword">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" value="submit">検索</button>
-            </form>
+                <button type="submit" class="btn btn-primary" v-on:click="serch">検索</button>
         </div>
+
+        <!-- モーダル部分 -->
         <div class="content serch_result" v-bind:class="Display">
             <a class="close pr-1 pt-1" v-on:click="display_off">✖️</a>
             <table class="table">
@@ -48,16 +48,30 @@
                     <th scope="col">開始時間</th>
                     </tr>
                 </thead>
-                <!--Scheduleモデルで作ったhtmlを表示 -->
-                <tbody v-html="html">
-                    
+
+                <!-- 検索結果を表示 -->
+                <tbody v-if="serch_results.length > 0">
+                    <tr v-for="serch_result in serch_results" :key="serch_result.username">
+                        <th scope="row"><a :href="serch_result.timeline_url">{{ serch_result.date }}</a></th>
+                        <td>{{ serch_result.username }}</td>
+                        <td>{{ serch_result.schedule }}</td>
+                        <td>{{ serch_result.time }}</td>
+                    </tr>
                 </tbody>
+                <tbody v-else>
+                    <tr>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td>予定が見つかりませんでした。</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                
             </table>
             
 
         </div>
-        <button type="button" class="btn btn-info" v-on:click="serch">検索</button>
-        {{value}}
+        
     </div>
 </template>
 
@@ -108,7 +122,7 @@ import DateDesignate from './DateDesignate.vue';
                 finish_hour: "%",
                 finish_minute: "%",
                 keyword: "",
-                value: ""
+                serch_results: []
             };
         },
         computed: {
@@ -163,7 +177,8 @@ import DateDesignate from './DateDesignate.vue';
                                              room_id: this.room_id
                                             })
                 .then((response) => {
-                    this.value = response;
+                    this.serch_results = response.data;
+                    this.Display = "display_on";
 
                 })
                 .catch((error) => {

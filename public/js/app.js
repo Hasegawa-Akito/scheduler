@@ -2704,6 +2704,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //function dev_console(variable){
 //console.log(variable);
 //}
@@ -2751,7 +2765,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       finish_hour: "%",
       finish_minute: "%",
       keyword: "",
-      value: ""
+      serch_results: []
     };
   },
   computed: {
@@ -2817,7 +2831,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   user_id: _this.input_user_id,
                   room_id: _this.room_id
                 }).then(function (response) {
-                  _this.value = response;
+                  _this.serch_results = response.data;
+                  _this.Display = "display_on";
                 })["catch"](function (error) {
                   _this.value = error;
                 });
@@ -45144,117 +45159,116 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form ml-3 mr-4", class: _vm.controll }, [
-      _c("div", { staticClass: "dark", class: _vm.Display }),
-      _vm._v(" "),
-      _c(
-        "form",
-        { attrs: { action: _vm.url, method: "post", autocomplete: "off" } },
-        [
-          _c("input", {
-            attrs: { type: "hidden", name: "_token" },
-            domProps: { value: _vm.csrf }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row align-items-center mb-2" }, [
-            _c("label", { staticClass: "form-label mt-1 ml-2" }, [
-              _vm._v("メンバー指定 ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.input_user_id,
-                        expression: "input_user_id"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { name: "user_id" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.input_user_id = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "%" } }, [_vm._v("全員")]),
-                    _vm._v(" "),
-                    _vm._l(_vm.user_infos, function(username, user_id) {
-                      return _c(
-                        "option",
-                        { key: username, domProps: { value: user_id } },
-                        [_vm._v(_vm._s(username))]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ])
-            ])
+    _c(
+      "div",
+      { staticClass: "form ml-3 mr-4", class: _vm.controll },
+      [
+        _c("div", { staticClass: "dark", class: _vm.Display }),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-row align-items-center mb-2" }, [
+          _c("label", { staticClass: "form-label mt-1 ml-2" }, [
+            _vm._v("メンバー指定 ")
           ]),
           _vm._v(" "),
-          _c("date-designate", { on: { recDate: _vm.recDate } }),
-          _vm._v(" "),
-          _c("time-designate", { on: { recTime: _vm.recTime } }),
-          _vm._v(" "),
-          _c("div", { staticClass: "keyword width" }, [
-            _c("div", { staticClass: "mb-3 mt-4" }, [
-              _c("label", { staticClass: "form-label" }, [_vm._v("key word")]),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "input-group" }, [
+              _vm._m(0),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.keyword,
-                    expression: "keyword"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", name: "keyword" },
-                domProps: { value: _vm.keyword },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input_user_id,
+                      expression: "input_user_id"
                     }
-                    _vm.keyword = $event.target.value
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "user_id" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.input_user_id = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
                   }
-                }
-              })
+                },
+                [
+                  _c("option", { attrs: { value: "%" } }, [_vm._v("全員")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.user_infos, function(username, user_id) {
+                    return _c(
+                      "option",
+                      { key: username, domProps: { value: user_id } },
+                      [_vm._v(_vm._s(username))]
+                    )
+                  })
+                ],
+                2
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "submit", value: "submit" }
-            },
-            [_vm._v("検索")]
-          )
-        ],
-        1
-      )
-    ]),
+          ])
+        ]),
+        _vm._v(" "),
+        _c("date-designate", { on: { recDate: _vm.recDate } }),
+        _vm._v(" "),
+        _c("time-designate", { on: { recTime: _vm.recTime } }),
+        _vm._v(" "),
+        _c("div", { staticClass: "keyword width" }, [
+          _c("div", { staticClass: "mb-3 mt-4" }, [
+            _c("label", { staticClass: "form-label" }, [_vm._v("key word")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.keyword,
+                  expression: "keyword"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "keyword" },
+              domProps: { value: _vm.keyword },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.keyword = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit" },
+            on: { click: _vm.serch }
+          },
+          [_vm._v("検索")]
+        )
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "content serch_result", class: _vm.Display }, [
       _c(
@@ -45266,20 +45280,29 @@ var render = function() {
       _c("table", { staticClass: "table" }, [
         _vm._m(1),
         _vm._v(" "),
-        _c("tbody", { domProps: { innerHTML: _vm._s(_vm.html) } })
+        _vm.serch_results.length > 0
+          ? _c(
+              "tbody",
+              _vm._l(_vm.serch_results, function(serch_result) {
+                return _c("tr", { key: serch_result.username }, [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _c("a", { attrs: { href: serch_result.timeline_url } }, [
+                      _vm._v(_vm._s(serch_result.date))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(serch_result.username))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(serch_result.schedule))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(serch_result.time))])
+                ])
+              }),
+              0
+            )
+          : _c("tbody", [_vm._m(2)])
       ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-info",
-        attrs: { type: "button" },
-        on: { click: _vm.serch }
-      },
-      [_vm._v("検索")]
-    ),
-    _vm._v("\n    " + _vm._s(_vm.value) + "\n")
+    ])
   ])
 }
 var staticRenderFns = [
@@ -45305,6 +45328,20 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("開始時間")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { scope: "row" } }),
+      _vm._v(" "),
+      _c("td"),
+      _vm._v(" "),
+      _c("td", [_vm._v("予定が見つかりませんでした。")]),
+      _vm._v(" "),
+      _c("td")
     ])
   }
 ]

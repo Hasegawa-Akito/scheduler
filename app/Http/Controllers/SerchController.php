@@ -32,40 +32,7 @@ class SerchController extends Controller
                             ]);
     }
 
-    public function serch(Request $request){
-        $session_user_id = $request->session()->get('user_id');
-        $session_room_id = $request->session()->get('room_id');
-
-        $serch_info = ["year" => $request->year,
-                       "month" => $request->month,
-                       "day" => $request->day,
-                       "start_hour" => $request->start_hour,
-                       "start_minute" => $request->start_minute,
-                       "finish_hour" => $request->finish_hour,
-                       "finish_minute" => $request->finish_minute,
-                       "keyword" => $request->keyword,
-                       "room_id" => $session_room_id,
-                       "user_id" => $request->user_id,
-                     ];
-
-        $schedule=new Schedule;
-        $schedule_serch_html = $schedule->schedule_serch_html($serch_info);
-        
-        $user_infos = array();
-        $user = new User;
-        $user_room_id_serchs = $user->user_room_id_serch($session_room_id);
-        foreach($user_room_id_serchs as $user_room_id_serch){
-            $user_infos = $user_infos+array($user_room_id_serch->user_id => $user_room_id_serch->username);
-        }
-
-        return view('serch',["view_user_id" => $session_user_id,
-                             "room_id" => $session_room_id,
-                             "display" => "display_on",
-                             "schedule_serch_html" => $schedule_serch_html,
-                             "user_infos" => $user_infos
-                            ]);
-    }
-
+    //予定検索時api
     public function serchApi(Request $request){
     
         $serch_info = ["year" => $request->year,
