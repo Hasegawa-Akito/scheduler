@@ -17,11 +17,12 @@ class TimetableCreate extends Model
     public function timetable_html($date, $view_user_id, $room_id){
 
         //検索日のスケジュールを取得
-        //roomメンバー全表示
+
+        //roomメンバー全表示の場合
         if($view_user_id == "all"){
             $query = Schedule::where('room_id', $room_id);
         }
-        //ユーザー個別表示
+        //ユーザー個別表示の場合
         else{
             $query = Schedule::where('user_id', $view_user_id);
         }
@@ -31,6 +32,7 @@ class TimetableCreate extends Model
                            ->get();
         
         
+        //一時間ごとのhtmlコードが入る配列を作成
         $html;
         for($k=0; $k<=24; $k++){
             $html[$k] = "";
@@ -39,6 +41,7 @@ class TimetableCreate extends Model
         $delete_url = url('/timetable/delete');
         $csrf = csrf_field();
         
+        //データベースから受け取った予定からhtmlコードを作成し$htmlに格納
         foreach($schedules as $schedule){
             $start_time = explode(":", explode(" ", $schedule->start_time)[1]);
             $start_hour = abs($start_time[0]);
@@ -96,21 +99,22 @@ class TimetableCreate extends Model
                 </tr>
         EOS;
 
-        //テーブルの横の時間を作成
         for($i=0; $i<=24; $i++){
+
             $hour = sprintf('%02d', $i);
             $next_hour = sprintf('%02d', $i+1);
             $dateTime = $date." ".$hour;
             //dd($dateTime);
 
             
-
+            //テーブルの横の時間を作成
             $this->timetable_html .= <<< EOS
                 <tr>
                     <th scope="row">$hour:00<br>〜</br>$next_hour:00</th>
                     <td>
             EOS;
-
+            
+            //$html格納されたhtmlコードを表示する時間帯に合わせて出力
             $this->timetable_html .= $html[$i];
             $this->timetable_html .= <<< EOS
                     </td>
