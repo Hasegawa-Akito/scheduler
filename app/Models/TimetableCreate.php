@@ -34,7 +34,7 @@ class TimetableCreate extends Model
         
         //一時間ごとのhtmlコードが入る配列を作成
         $html;
-        for($k=0; $k<=24; $k++){
+        for($k = 0; $k <= 23; $k++){
             $html[$k] = "";
         }
         
@@ -71,7 +71,7 @@ class TimetableCreate extends Model
                 $finish_hour = $finish_hour-1;
             }
 
-            for($t=$start_hour+1; $t<=$finish_hour; $t++){
+            for($t = $start_hour + 1; $t <= $finish_hour; $t++){
                 $html[$t] .= <<< EOS
                 <div class="radius mb-2 $schedule->color">$schedule->schedule<a>  $start_HM~$finish_HM</a>
                 <form class="mb-2 mr-2 removal" action="$delete_url" method="post">
@@ -99,7 +99,7 @@ class TimetableCreate extends Model
                 </tr>
         EOS;
 
-        for($i=0; $i<=24; $i++){
+        for($i = 0; $i <= 23; $i++){
 
             $hour = sprintf('%02d', $i);
             $next_hour = sprintf('%02d', $i+1);
