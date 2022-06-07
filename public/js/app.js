@@ -2518,6 +2518,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 //vueでaxiosを使えるようにする
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2554,7 +2559,7 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       existing: false,
       valid: false,
-      menu: "新規ルーム作成画面へ",
+      menue: "新規ルーム作成画面へ",
       value: "login",
       click: 0,
       type: "ログイン",
@@ -2588,7 +2593,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form_url = this.create_url;
         this.message = "";
         this.value = "create";
-        this.menu = "ルームログイン画面へ";
+        this.menue = "ルームログイン画面へ";
         this.type = "新規作成";
         this.room_name = "";
         this.password = "";
@@ -2597,7 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form_url = this.login_url;
         this.message = "";
         this.value = "login";
-        this.menu = "新規ルーム作成画面へ";
+        this.menue = "新規ルーム作成画面へ";
         this.type = "ログイン";
         this.room_name = "";
         this.password = "";
@@ -3000,6 +3005,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 //vueでaxiosを使えるようにする
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3040,7 +3049,7 @@ __webpack_require__.r(__webpack_exports__);
       password: "",
       existing: false,
       valid: false,
-      menu: "新規ユーザー作成画面へ",
+      menue: "新規ユーザー作成画面へ",
       value: "login",
       click: 0,
       type: "ログイン",
@@ -3075,7 +3084,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form_url = this.create_url;
         this.message = "";
         this.value = "create";
-        this.menu = "ユーザーログイン画面へ";
+        this.menue = "ユーザーログイン画面へ";
         this.type = "新規作成";
         this.username = "";
         this.password = "";
@@ -3084,7 +3093,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form_url = this.login_url;
         this.message = "";
         this.value = "login";
-        this.menu = "新規ユーザー作成画面へ";
+        this.menue = "新規ユーザー作成画面へ";
         this.type = "ログイン";
         this.username = "";
         this.password = "";
@@ -45021,15 +45030,25 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "text-right mb-5" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-info white",
-              attrs: { type: "button", name: "menu", value: _vm.value },
-              on: { click: _vm.value_change }
-            },
-            [_vm._v(_vm._s(_vm.menu))]
-          )
+          _vm.value == "login"
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-info white",
+                  attrs: { type: "button", name: "menue", value: _vm.value },
+                  on: { click: _vm.value_change }
+                },
+                [_vm._v(_vm._s(_vm.menue))]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-success white",
+                  attrs: { type: "button", name: "menue", value: _vm.value },
+                  on: { click: _vm.value_change }
+                },
+                [_vm._v(_vm._s(_vm.menue))]
+              )
         ]),
         _vm._v(" "),
         _c("input", {
@@ -45118,18 +45137,28 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "mt-5 btn btn-lg btn-primary btn-block",
-            class: _vm.class_name,
-            attrs: { onclick: "submit();", type: "button" }
-          },
-          [_vm._v(_vm._s(_vm.type))]
-        ),
+        _vm.value == "login"
+          ? _c(
+              "button",
+              {
+                staticClass: "mt-5 btn btn-lg btn-primary btn-block",
+                class: _vm.class_name,
+                attrs: { onclick: "submit();", type: "button" }
+              },
+              [_vm._v(_vm._s(_vm.type))]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "mt-5 btn btn-lg btn-success btn-block",
+                class: _vm.class_name,
+                attrs: { onclick: "submit();", type: "button" }
+              },
+              [_vm._v(_vm._s(_vm.type))]
+            ),
         _vm._v(" "),
         _c("p", { staticClass: "mt-5 mb-3 text-muted text-center" }, [
-          _vm._v(_vm._s(_vm.page))
+          _vm._v("ルーム" + _vm._s(_vm.page))
         ])
       ]
     )
@@ -45650,15 +45679,25 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "text-right mb-5" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-info white",
-              attrs: { type: "button", name: "menu", value: _vm.value },
-              on: { click: _vm.value_change }
-            },
-            [_vm._v(_vm._s(_vm.menu))]
-          )
+          _vm.value == "login"
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-info white",
+                  attrs: { type: "button", name: "menue", value: _vm.value },
+                  on: { click: _vm.value_change }
+                },
+                [_vm._v(_vm._s(_vm.menue))]
+              )
+            : _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-success white",
+                  attrs: { type: "button", name: "menue", value: _vm.value },
+                  on: { click: _vm.value_change }
+                },
+                [_vm._v(_vm._s(_vm.menue))]
+              )
         ]),
         _vm._v(" "),
         _c("input", {
@@ -45752,18 +45791,28 @@ var render = function() {
           domProps: { value: _vm.room_id }
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "mt-5 btn btn-lg btn-primary btn-block",
-            class: _vm.class_name,
-            attrs: { onclick: "submit();", type: "button" }
-          },
-          [_vm._v(_vm._s(_vm.type))]
-        ),
+        _vm.value == "login"
+          ? _c(
+              "button",
+              {
+                staticClass: "mt-5 btn btn-lg btn-primary btn-block",
+                class: _vm.class_name,
+                attrs: { onclick: "submit();", type: "button" }
+              },
+              [_vm._v(_vm._s(_vm.type))]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "mt-5 btn btn-lg btn-success btn-block",
+                class: _vm.class_name,
+                attrs: { onclick: "submit();", type: "button" }
+              },
+              [_vm._v(_vm._s(_vm.type))]
+            ),
         _vm._v(" "),
         _c("p", { staticClass: "mt-5 mb-3 text-muted text-center" }, [
-          _vm._v(_vm._s(_vm.page))
+          _vm._v("ユーザー" + _vm._s(_vm.page))
         ])
       ]
     )

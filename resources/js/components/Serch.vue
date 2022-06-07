@@ -66,7 +66,7 @@
                         <td></td>
                     </tr>
                 </tbody>
-                
+
             </table>
             
 
@@ -81,7 +81,7 @@ import DateDesignate from './DateDesignate.vue';
     //function dev_console(variable){
     //console.log(variable);
     //}
-    export default {
+export default {
   components: { DateDesignate },
         props: {
             html: {
