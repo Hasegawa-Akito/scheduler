@@ -11,44 +11,44 @@ use App\Models\Announcement;
 
 class Announcement extends Model
 {
-    private $announce_html="";
+    private $announce_html = "";
 
     use HasFactory;
-    protected $table='announcements';
+    protected $table = 'announcements';
     protected $fillable = [
-        'user_id','room_id','announce','type',
+        'user_id', 'room_id', 'announce', 'type',
     ];
 
-
+    // アナウンス一覧を作成
     public function create_announce_html($room_id){
 
-        $post_url=url('/announce/delete');
+        $post_url = url('/announce/delete');
 
-        $announcements=Announcement::where('room_id',$room_id)
-                                    ->orderBy('created_at','desc')
-        ->get();
+        $announcements = Announcement::where('room_id', $room_id)
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
         foreach($announcements as $announcement){
 
-            $announce_user=User::where('user_id',$announcement->user_id)->first();
-            $csrf=csrf_field();
+            $announce_user = User::where('user_id', $announcement->user_id)->first();
+            $csrf = csrf_field();
 
             //ルームを退出しアナウンスしたユーザーが存在しない時
             if(!isset($announce_user)){
-                $announce_username="unknown";
+                $announce_username = "unknown";
             }else{
-                $announce_username=$announce_user->username;
+                $announce_username = $announce_user->username;
             }
 
             //アナウンス画面でのiconのurl作成
-            $picture_url=asset('/picture/type_img/'.$announcement->type.'.jpg');
+            $picture_url = asset('/picture/type_img/'.$announcement->type.'.jpg');
             //dd($picture_url);
 
 
-            //vueにあたいを送るよう
-            $delete_id=json_encode($announcement->id);
+            //vueに値を送るようにjson形式
+            $delete_id = json_encode($announcement->id);
             //dd($delete_id);
 
-            $this->announce_html.= <<<EOS
+            $this->announce_html .= <<<EOS
                 <div class="text-muted border-bottom pt-3 pr-1 mb-3 announce-content">
                     <form class="mb-2 mr-2 removal" action="$post_url" method="post">
                         $csrf
@@ -72,19 +72,27 @@ class Announcement extends Model
     }
 
     public function create_announce($announce_info){
-        $announcement=new Announcement;
-        $announcement->user_id=$announce_info["user_id"];
-        $announcement->room_id=$announce_info["room_id"];
-        $announcement->announce=$announce_info["announce"];
-        $announcement->type=$announce_info["type"];
+        $announcement = new Announcement;
+        $announcement->user_id = $announce_info["user_id"];
+        $announcement->room_id = $announce_info["room_id"];
+        $announcement->announce = $announce_info["announce"];
+        $announcement->type = $announce_info["type"];
 
         return $announcement->save();
 
 
     }
-    public function announce_delete($delete_id){
-        $announcement=new Announcement;
-        $announcement->destroy($delete_id);
+
+    public function announce_delete($delete_id, $session_room_id){
+        $announcement = new Announcement;
+        $announce_info = Announcement::where('id', $delete_id)
+                                    ->first();
+        
+        // アナウンスが存在しアナウンスのroom_idとsession情報が同じなら削除
+        if(isset($announce_info) && ($announce_info->room_id == $session_room_id)){
+            $announcement->destroy($delete_id);
+        }
+
                         
     }
 }

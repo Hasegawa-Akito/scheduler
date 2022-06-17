@@ -7,30 +7,20 @@ use App\Models\User;
 use App\Models\Schedule;
 use App\Models\TimetableCreate;
 use App\Models\Room;
+use App\Models\Session;
 
 
 
 class TimetableController extends Controller
 {
 
-    private $session_user_id;
-    private $session_room_id;
-
-    //sessionに保存されているroomidと渡されたroomidが同じか
-    private function confirm_session($request, $room_id){
-
-        //sessionからユーザーidとルームidを取得
-        $this->session_user_id = $request->session()->get('user_id');
-        $this->session_room_id = $request->session()->get('room_id');
-
-        return $room_id != $this->session_room_id;
-    }
-
     //getの時の処理
     public function timetable_index(Request $request, $view_user_id, $room_id, $display_date){
+        // Sesstionモデルを使用
+        $session = new Session($request);
 
         //sessionの情報とroom_idが違えばログイン画面へリダイレクト
-        if($this->confirm_session($request, $room_id)){
+        if($session->confirm_session($request, $room_id)){
             return redirect(url('/roomlogin'));
         }
         
@@ -66,10 +56,10 @@ class TimetableController extends Controller
         $timetable_html = $timetable_create->timetable_html($date, $view_user_id, $room_id);
 
         //メンバーボタン作成
-        $member_btn_html = $user->member_list_btn($this->session_user_id, $this->session_room_id);
+        $member_btn_html = $user->member_list_btn($session->session_user_id, $session->session_room_id);
         
         return view('timetable', ["timetable_html" => $timetable_html,
-                                  "user_id" => $this->session_user_id,
+                                  "user_id" => $session->session_user_id,
                                   "view_username" => $view_username,
                                   "view_user_id" => $view_user_id,
                                   "room_id" => $room_id,
@@ -96,10 +86,11 @@ class TimetableController extends Controller
 
     //予定削除処理
     public function timetable_delete(Request $request){
+        $session = new Session($request);
         
         //そのルームの人以外が削除しようとしたらリダイレクト
-        if($this->confirm_session($request, $request->room_id)){
-            return redirect(url('/timetable/'.$this->session_user_id.'/'.$this->session_room_id.'/'.$request->display_date));
+        if($session->confirm_session($request, $request->room_id)){
+            return redirect(url('/timetable/'.$session->session_user_id.'/'.$session->session_room_id.'/'.$request->display_date));
         }
         
         $schedule = new Schedule;

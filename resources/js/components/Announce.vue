@@ -44,28 +44,28 @@
 
     export default {
         props: {
-            url:{
-                type:String,
-                required:true
+            url: {
+                type: String,
+                required: true
             },
-            csrf:{
-                type:String,
-                required:true
+            csrf: {
+                type: String,
+                required: true
             },
             
         },
         data(){
             return {
-                display:"display-off"
+                display: "display-off"
             };
         },
         
-        methods:{
-            display_on:function(){
-                this.display="display-on";
+        methods: {
+            display_on: function(){
+                this.display = "display-on";
             },
-            display_off:function(){
-                this.display="display-off";
+            display_off: function(){
+                this.display = "display-off";
             }
         }
     }
