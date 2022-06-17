@@ -11,7 +11,7 @@ use App\Models\Schedule;
 class Schedule extends Model
 {
     use HasFactory;
-    protected $table='schedules';
+    protected $table = 'schedules';
     protected $fillable = [
         'user_id', 'room_id', 'schedule', 'start_time', 'finish_time', 'keyword', 'color'
     ];
