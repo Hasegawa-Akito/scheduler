@@ -23,42 +23,42 @@
 
     export default {
         props: {
-            timetable_url:{
+            timetable_url: {
                 type:String,
                 required:true
             },
-            add_url:{
+            add_url: {
                 type:String,
                 required:true
             },
-            announce_url:{
+            announce_url: {
                 type:String,
                 required:true
             },
-            serch_url:{
+            serch_url: {
                 type:String,
                 required:true
             },
-            leaving_url:{
+            leaving_url: {
                 type:String,
                 required:true
             },
         },
         data(){
             return{
-                display:"menu-display-off",
-                click:"on",
+                display: "menu-display-off",
+                click: "on",
             };
         },
-        methods:{
-            display_change:function(){
-                if(this.click=="on"){
-                    this.display="menu-display-on"
-                    this.click="off"
+        methods: {
+            display_change: function(){
+                if(this.click == "on"){
+                    this.display = "menu-display-on"
+                    this.click = "off"
                 }
-                else if(this.click=="off"){
-                    this.display="menu-display-off"
-                    this.click="on"
+                else if(this.click == "off"){
+                    this.display = "menu-display-off"
+                    this.click = "on"
                 }
 
             }

@@ -12,15 +12,15 @@
 
     export default {
         props: {
-            schedule_id:{
+            schedule_id: {
                 type:Number,
                 required:true
             },
             
         },
-        methods:{
-            confirm:function(event){
-                const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
+        methods: {
+            confirm: function(event){
+                const ans = confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
                 if(!ans){
                     event.preventDefault();
                 }

@@ -12,14 +12,14 @@
 
     export default {
         props: {
-            deleteid:{
+            deleteid: {
                 type:Number,
                 required:true
             }
         },
         methods:{
-            confirm:function(event){
-                const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
+            confirm: function(event){
+                const ans = confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
                 if(!ans){
                     event.preventDefault();
                 }

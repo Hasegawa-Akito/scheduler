@@ -9,7 +9,7 @@
         props: {
             
         },
-        methods:{
+        methods: {
             
         },
     }

@@ -18,7 +18,7 @@ import Datepicker from 'vuejs-datepicker';
             'datepicker':Datepicker,
         },
         props: {
-            date:{
+            date: {
                 type:String,
                 required:true
             },
