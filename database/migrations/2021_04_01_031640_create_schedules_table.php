@@ -21,7 +21,7 @@ class CreateSchedulesTable extends Migration
             $table->dateTime('start_time');
             $table->dateTime('finish_time');
             $table->string('keyword');
-            $table->string('color',20);
+            $table->string('color', 20);
             $table->timestamps();
         });
     }
