@@ -46,8 +46,11 @@ class User extends Authenticatable
         $user->password = $user_info['password'];
         $user->username = $user_info['username'];
         $user->room_id = $user_info['room_id'];
+        $user->save();
 
-        return $user->save();
+        $id = ["user_id" => $user->id, "room_id" => $user_info['room_id']];
+
+        return $id;
     }
 
     //login時のユーザー照合

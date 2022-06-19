@@ -20,7 +20,11 @@ class Room extends Model
         $room = new Room;
         $room->room_name = $room_info["room_name"];
         $room->password = $room_info["password"];
-        return $room->save();
+        $room->save();
+
+        $room_id = $room->id;
+
+        return $room_id;
     }
 
     public function room_serch($room_info){
