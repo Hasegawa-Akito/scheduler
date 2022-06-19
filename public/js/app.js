@@ -1986,7 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
         var finish_hour = parseInt(this.finish_time.HH, 10);
         var finish_minute = parseInt(this.finish_time.mm, 10);
         var hour = start_hour - finish_hour;
-        var minute = start_minute - finish_minute;
+        var minute = start_minute - finish_minute; // 終了時間の方が開始時間より早い場合は送れない
 
         if (hour > 0 || hour == 0 && minute > 0) {
           return "not_submit";

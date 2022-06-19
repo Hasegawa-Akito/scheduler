@@ -79,7 +79,7 @@ import Datepicker from 'vuejs-datepicker';
     export default {
         components: {
             'timepicker': VueTimepicker,
-            'datepicker':Datepicker,
+            'datepicker': Datepicker,
         },
         props: {
             form_url:{
@@ -95,10 +95,10 @@ import Datepicker from 'vuejs-datepicker';
         data(){
             return{
                 //v-modelで連携
-                start_time:{ "HH": "00", "mm": "00" },
-                finish_time:{ "HH": "00", "mm": "00" },
-                schedule:null,
-                key:null,
+                start_time: { "HH": "00", "mm": "00" },
+                finish_time: { "HH": "00", "mm": "00" },
+                schedule: null,
+                key: null,
                 defaultDate: new Date(),
                 DatePickerFormat: 'yyyy-MM-dd',
                 ja: {
@@ -112,23 +112,24 @@ import Datepicker from 'vuejs-datepicker';
                 }
             }
         },
-        computed:{
+        computed: {
             //有効でないroom名または記入漏れの時は送信できないようにする
-            class_name:function(){
+            class_name: function(){
                 
-                if((!this.schedule)||(!this.key)){
+                if((!this.schedule) || (!this.key)){
                         return "not_submit";
                 }
                 else{
-                    var start_hour=parseInt(this.start_time.HH,10);
-                    var start_minute=parseInt(this.start_time.mm,10);
-                    var finish_hour=parseInt(this.finish_time.HH,10);
-                    var finish_minute=parseInt(this.finish_time.mm,10);
+                    var start_hour = parseInt(this.start_time.HH, 10);
+                    var start_minute = parseInt(this.start_time.mm, 10);
+                    var finish_hour = parseInt(this.finish_time.HH, 10);
+                    var finish_minute = parseInt(this.finish_time.mm, 10);
 
-                    var hour=start_hour-finish_hour;
-                    var minute=start_minute-finish_minute;
+                    var hour = start_hour - finish_hour;
+                    var minute = start_minute - finish_minute;
                     
-                    if((hour>0)||(hour==0&&minute>0)){
+                    // 終了時間の方が開始時間より早い場合は送れない
+                    if((hour > 0) || (hour == 0 && minute > 0)){
                         return "not_submit";
                     }
 
